@@ -169,7 +169,7 @@ export default function WaitlistForm() {
                   </svg>
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  You're on the list!
+                  You&apos;re on the list!
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   You&apos;re currently #{formState.waitlistPosition} in line.

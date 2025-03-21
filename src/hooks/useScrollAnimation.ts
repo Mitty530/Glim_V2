@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useInView } from 'framer-motion';
@@ -48,44 +48,44 @@ export const useScrollAnimation = (
   const isInView = useInView(element, { once, amount: threshold, margin: rootMargin });
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  // For simple animations using Framer Motion's useInView
-  const simpleAnimation = () => {
-    if (element.current && isInView && !hasAnimated) {
-      gsap.fromTo(
-        element.current,
-        { ...from },
-        { ...to, delay, duration, ease }
-      );
-      if (once) {
-        setHasAnimated(true);
-      }
-    }
-  };
-
-  // For scroll-triggered animations using GSAP ScrollTrigger
-  const scrollTriggerAnimation = () => {
-    if (element.current && !animation.current) {
-      animation.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: element.current,
-          start,
-          end,
-          scrub,
-          markers,
-          toggleActions,
-        },
-      });
-
-      animation.current.fromTo(
-        element.current,
-        { ...from },
-        { ...to, duration }
-      );
-    }
-  };
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    // For simple animations using Framer Motion's useInView
+    const simpleAnimation = () => {
+      if (element.current && isInView && !hasAnimated) {
+        gsap.fromTo(
+          element.current,
+          { ...from },
+          { ...to, delay, duration, ease }
+        );
+        if (once) {
+          setHasAnimated(true);
+        }
+      }
+    };
+
+    // For scroll-triggered animations using GSAP ScrollTrigger
+    const scrollTriggerAnimation = () => {
+      if (element.current && !animation.current) {
+        animation.current = gsap.timeline({
+          scrollTrigger: {
+            trigger: element.current,
+            start,
+            end,
+            scrub,
+            markers,
+            toggleActions,
+          },
+        });
+
+        animation.current.fromTo(
+          element.current,
+          { ...from },
+          { ...to, duration }
+        );
+      }
+    };
 
     if (scrub !== false) {
       scrollTriggerAnimation();
@@ -99,7 +99,7 @@ export const useScrollAnimation = (
         animation.current = null;
       }
     };
-  }, [isInView, scrollTriggerAnimation, scrub, simpleAnimation]);
+  }, [isInView, once, hasAnimated, from, to, delay, duration, ease, start, end, scrub, markers, toggleActions]);
 
   return { ref: element, isInView, hasAnimated };
 };
