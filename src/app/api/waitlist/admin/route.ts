@@ -22,11 +22,10 @@ export async function GET(request: NextRequest) {
         { 
           totalSignups: countResult.success ? countResult.count : supabaseResult.data.length,
           entries: supabaseResult.data.map(entry => ({
-            firstName: entry.firstName,
+            name: entry.name,
             email: entry.email,
-            waitlistPosition: entry.position,
-            createdAt: entry.createdAt,
-            comments: entry.comments
+            createdAt: entry.created_at,
+            features: entry.features
           }))
         },
         { status: 200 }
@@ -58,15 +57,14 @@ export async function GET(request: NextRequest) {
       );
     }
     
-    // Transform entries object to array and sort by position
+    // Transform entries object to array and sort by creation date
     const entries = Object.values(data.entries)
-      .sort((a: any, b: any) => a.waitlistPosition - b.waitlistPosition)
+      .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
       .map((entry: any) => ({
-        firstName: entry.firstName,
+        name: entry.name || entry.firstName,
         email: entry.email,
-        waitlistPosition: entry.waitlistPosition,
-        createdAt: entry.createdAt,
-        comments: entry.comments
+        createdAt: entry.createdAt || entry.created_at,
+        features: entry.features || entry.comments
       }));
     
     return NextResponse.json(
