@@ -1,0 +1,42 @@
+GLIM
+----------
+
+THANK YOU FOR JOINING OUR WAITLIST!
+
+Hi {{firstName}},
+
+Thank you for joining the Glim waitlist! We're thrilled to have you on board as we prepare to launch our revolutionary networking intelligence platform.
+
+We'll notify you as soon as we're ready to welcome you to Glim.
+
+While you wait, here's what you can look forward to:
+
+* Transform casual conversations into structured contact cards
+* Never forget important details about your professional connections
+* Get timely follow-up reminders for meaningful relationships
+* Access insights about your network that would otherwise be lost
+
+{{#comments}}
+YOUR FEATURE REQUESTS:
+{{comments}}
+
+Thank you for your feedback! We appreciate your input on features you'd like to see in Glim.
+{{/comments}}
+
+If you have any questions in the meantime, feel free to reply to this email. We're here to help.
+
+Best regards,
+The Glim Team
+
+----------
+
+© 2023 Glim. All rights reserved.
+123 AI Boulevard, San Francisco, CA 94107
+
+Follow us:
+Twitter: https://twitter.com/glimapp
+LinkedIn: https://linkedin.com/company/glimapp
+Instagram: https://instagram.com/glimapp
+
+You're receiving this email because you signed up for the Glim waitlist.
+If you'd like to unsubscribe, visit: https://glim.app/unsubscribe/{{unsubscribeToken}} 

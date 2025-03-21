@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the Glim Waitlist</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header {
+      background: linear-gradient(to right, #6d28d9, #4f46e5);
+      color: white;
+      padding: 20px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+    }
+    .content {
+      background-color: #f9fafb;
+      padding: 30px;
+      border-radius: 0 0 8px 8px;
+      border: 1px solid #e5e7eb;
+      border-top: none;
+    }
+    .highlight {
+      background-color: #f0f9ff;
+      border-left: 4px solid #3b82f6;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .button {
+      display: inline-block;
+      background: linear-gradient(to right, #6d28d9, #4f46e5);
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 20px 0;
+    }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 30px;
+    }
+    .social {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .social a {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <!-- Logo would be included here -->
+    <h1 style="color: #6d28d9; margin: 0;">Glim</h1>
+  </div>
+  
+  <div class="header">
+    <h2 style="margin: 0;">Thank You for Joining Our Waitlist!</h2>
+  </div>
+  
+  <div class="content">
+    <p>Hi {{firstName}},</p>
+    
+    <p>Thank you for joining the Glim waitlist! We're thrilled to have you on board as we prepare to launch our revolutionary networking intelligence platform.</p>
+    
+    <p>While you wait, here's what you can look forward to:</p>
+    
+    <ul>
+      <li>Transform casual conversations into structured contact cards</li>
+      <li>Never forget important details about your professional connections</li>
+      <li>Get timely follow-up reminders for meaningful relationships</li>
+      <li>Access insights about your network that would otherwise be lost</li>
+    </ul>
+    
+    {{#comments}}
+    <div class="highlight" style="background-color: #f3f4f6; border-left-color: #6d28d9;">
+      <p><strong>Your Feature Requests:</strong></p>
+      <p>{{comments}}</p>
+      <p><small>Thank you for your feedback! We appreciate your input on features you'd like to see in Glim.</small></p>
+    </div>
+    {{/comments}}
+    
+    <p>If you have any questions in the meantime, feel free to reply to this email. We're here to help.</p>
+    
+    <p>Best regards,<br>
+    The Glim Team</p>
+  </div>
+  
+  
+    
+    <p>© 2025 Glim. All rights reserved.</p>
+    <p>UAE</p>
+    
+    <p><small>You're receiving this email because you signed up for the Glim waitlist.<br>
+    If you'd like to unsubscribe, <a href="https://glim.app/unsubscribe/{{unsubscribeToken}}">click here</a>.</small></p>
+  </div>
+</body>
+</html> 
