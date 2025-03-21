@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.4",
+    "@supabase/supabase-js": "^2.49.1",
     "framer-motion": "^10.18.0",
     "gsap": "^3.12.5",
     "lenis": "^1.2.3",

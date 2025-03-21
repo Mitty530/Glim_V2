@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getWaitlistEntries, getWaitlistCount } from '@/lib/supabase';
 import fs from 'fs';
 import path from 'path';
 
@@ -10,7 +11,29 @@ export async function GET(request: NextRequest) {
     // In a real app, you would verify admin authentication here
     // This is just a simple implementation for demonstration
     
-    // Check if the waitlist data file exists
+    // First try to get data from Supabase
+    const supabaseResult = await getWaitlistEntries();
+    
+    if (supabaseResult.success && supabaseResult.data && supabaseResult.data.length > 0) {
+      // We have data from Supabase
+      const countResult = await getWaitlistCount();
+      
+      return NextResponse.json(
+        { 
+          totalSignups: countResult.success ? countResult.count : supabaseResult.data.length,
+          entries: supabaseResult.data.map(entry => ({
+            firstName: entry.firstName,
+            email: entry.email,
+            waitlistPosition: entry.position,
+            createdAt: entry.createdAt,
+            comments: entry.comments
+          }))
+        },
+        { status: 200 }
+      );
+    }
+    
+    // Fallback to file-based storage if Supabase fails
     if (!fs.existsSync(WAITLIST_FILE_PATH)) {
       return NextResponse.json(
         { 

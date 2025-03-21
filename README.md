@@ -76,3 +76,24 @@ npm run start
 ## License
 
 This project is licensed under the MIT License.
+
+## Supabase Integration
+
+This project uses Supabase to store waitlist data. Follow these steps to set up Supabase:
+
+1. Create a free account at [Supabase](https://supabase.com/)
+2. Create a new project
+3. Set up a database table called `waitlist` with the following columns:
+   - `id` (UUID, primary key)
+   - `firstName` (text)
+   - `email` (text, unique)
+   - `comments` (text, nullable)
+   - `position` (integer)
+   - `createdAt` (timestamp with timezone)
+4. Get your Supabase URL and service role key from the project settings
+5. Add these values to your environment variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   ```
+6. Make sure to add these variables to your Vercel deployment settings

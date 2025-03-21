@@ -1,5 +1,5 @@
 {
-  "count": 1,
+  "count": 2,
   "entries": {
     "hafssatou280@gmail.com": {
       "firstName": "Mitty",
@@ -9,7 +9,15 @@
       "unsubscribeToken": "aGFmc3NhdG91MjgwQGdtYWlsLmNvbS0xNzQyNTYwNjAzNDk0",
       "waitlistPosition": 1,
       "comments": "anything that will be good for the app\n"
+    },
+    "mamadouourydiallo819@gmail.com": {
+      "firstName": "Mamadououry",
+      "email": "mamadouourydiallo819@gmail.com",
+      "createdAt": "2025-03-21T15:52:54.366Z",
+      "unsubscribeToken": "bWFtYWRvdW91cnlkaWFsbG84MTlAZ21haWwuY29tLTE3NDI1NzIzNzQzNjY=",
+      "waitlistPosition": 2,
+      "comments": "akjajrf"
     }
   },
-  "lastUpdated": "2025-03-21T12:36:43.494Z"
+  "lastUpdated": "2025-03-21T15:52:54.366Z"
 }

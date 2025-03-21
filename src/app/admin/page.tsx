@@ -13,6 +13,7 @@ interface WaitlistEntry {
 interface WaitlistData {
   totalSignups: number;
   entries?: WaitlistEntry[];
+  error?: string;
 }
 
 export default function AdminPage() {
@@ -36,7 +37,12 @@ export default function AdminPage() {
         }
         
         const data = await response.json()
-        setWaitlistData(data)
+        
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setWaitlistData(data)
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
       } finally {
@@ -79,6 +85,9 @@ export default function AdminPage() {
           <p className="text-2xl font-bold text-blue-400">
             Total Signups: {waitlistData?.totalSignups || 0}
           </p>
+          <p className="text-sm text-gray-400 mt-2">
+            Data source: {waitlistData?.entries?.length ? 'Supabase & Local Storage' : 'Local Storage'}
+          </p>
         </div>
         
         {waitlistData?.entries && waitlistData.entries.length > 0 ? (
@@ -105,19 +114,19 @@ export default function AdminPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700">
-                {waitlistData.entries.map((entry) => (
-                  <tr key={entry.email} className="hover:bg-gray-700">
+                {waitlistData.entries.map((entry, index) => (
+                  <tr key={entry.email || index} className="hover:bg-gray-700">
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      #{entry.waitlistPosition}
+                      #{entry.waitlistPosition || index + 1}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {entry.firstName}
+                      {entry.firstName || 'Unknown'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {entry.email}
+                      {entry.email || 'No email'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {new Date(entry.createdAt).toLocaleDateString()}
+                      {entry.createdAt ? new Date(entry.createdAt).toLocaleDateString() : 'Unknown'}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       {entry.comments || '-'}

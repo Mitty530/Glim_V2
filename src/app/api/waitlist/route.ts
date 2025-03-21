@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateUnsubscribeToken, sendWaitlistConfirmationEmail } from '@/lib/email';
+import { saveWaitlistEntry, getWaitlistCount } from '@/lib/supabase';
 import fs from 'fs';
 import path from 'path';
 
@@ -84,8 +85,9 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Increment waitlist count
-    waitlistCount++;
+    // Get the current waitlist count from Supabase
+    const countResult = await getWaitlistCount();
+    const currentPosition = countResult.success ? countResult.count + 1 : waitlistCount + 1;
     
     // Generate unsubscribe token
     const unsubscribeToken = generateUnsubscribeToken(email);
@@ -96,15 +98,25 @@ export async function POST(request: NextRequest) {
       email,
       createdAt: new Date(),
       unsubscribeToken,
-      waitlistPosition: waitlistCount,
+      waitlistPosition: currentPosition,
       comments: body.comments || ''
     };
     
-    // Store the entry
+    // Store the entry locally
     waitlistEntries[email] = entry;
+    waitlistCount = Math.max(waitlistCount + 1, currentPosition);
     
     // Save to file
     saveWaitlistData();
+    
+    // Save to Supabase
+    const supabaseResult = await saveWaitlistEntry({
+      firstName: entry.firstName,
+      email: entry.email,
+      comments: entry.comments,
+      createdAt: entry.createdAt.toISOString(),
+      position: entry.waitlistPosition
+    });
     
     // Send confirmation email
     const emailSent = await sendWaitlistConfirmationEmail({
@@ -119,7 +131,8 @@ export async function POST(request: NextRequest) {
       { 
         message: 'Successfully joined the waitlist!',
         success: true,
-        emailSent: emailSent
+        emailSent: emailSent,
+        supabaseSaved: supabaseResult.success
       },
       { status: 200 }
     );
