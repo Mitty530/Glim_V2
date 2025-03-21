@@ -3,6 +3,7 @@ import { generateUnsubscribeToken, sendWaitlistConfirmationEmail } from '@/lib/e
 import { saveWaitlistEntry, getWaitlistCount } from '@/lib/supabase';
 import fs from 'fs';
 import path from 'path';
+import { supabase } from '@/lib/supabase';
 
 // Define the path for storing waitlist data
 const WAITLIST_DATA_PATH = path.join(process.cwd(), 'data');
@@ -51,18 +52,26 @@ const saveWaitlistData = () => {
 };
 
 interface WaitlistEntry {
-  firstName: string;
+  name: string;
   email: string;
   createdAt: Date;
   unsubscribeToken: string;
   waitlistPosition: number;
-  comments?: string;
+  features?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
     const body = await request.json();
+    
+    // Log debugging info
+    console.log('Request body:', body);
+    console.log('Environment variables:', {
+      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasAnonKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY
+    });
     
     // Validate required fields
     if (!body.email) {
@@ -72,75 +81,71 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    const email = body.email.toLowerCase().trim();
-    
-    // Check if email is already in waitlist
-    if (waitlistEntries[email]) {
+    if (!body.name) {
       return NextResponse.json(
-        { 
-          message: 'You are already on our waitlist!',
-          success: true
-        },
-        { status: 200 }
+        { error: 'Name is required' },
+        { status: 400 }
       );
     }
     
-    // Get the current waitlist count from Supabase
-    const countResult = await getWaitlistCount();
-    const currentPosition = countResult.success ? countResult.count + 1 : waitlistCount + 1;
+    const email = body.email.toLowerCase().trim();
+    const name = body.name.trim();
+    const features = body.features || '';
     
-    // Generate unsubscribe token
-    const unsubscribeToken = generateUnsubscribeToken(email);
+    console.log('Processing waitlist submission for:', email);
     
-    // Create the waitlist entry
-    const entry: WaitlistEntry = {
-      firstName: body.firstName || 'Glim User',
-      email,
-      createdAt: new Date(),
-      unsubscribeToken,
-      waitlistPosition: currentPosition,
-      comments: body.comments || ''
-    };
-    
-    // Store the entry locally
-    waitlistEntries[email] = entry;
-    waitlistCount = Math.max(waitlistCount + 1, currentPosition);
-    
-    // Save to file
-    saveWaitlistData();
-    
-    // Save to Supabase
-    const supabaseResult = await saveWaitlistEntry({
-      firstName: entry.firstName,
-      email: entry.email,
-      comments: entry.comments,
-      createdAt: entry.createdAt.toISOString(),
-      position: entry.waitlistPosition
-    });
-    
-    // Send confirmation email
-    const emailSent = await sendWaitlistConfirmationEmail({
-      firstName: entry.firstName,
-      email: entry.email,
-      unsubscribeToken: entry.unsubscribeToken,
-      comments: entry.comments
-    });
-    
-    // Return success response
-    return NextResponse.json(
-      { 
-        message: 'Successfully joined the waitlist!',
-        success: true,
-        emailSent: emailSent,
-        supabaseSaved: supabaseResult.success
-      },
-      { status: 200 }
-    );
+    // Insert directly into waiting_list table
+    try {
+      console.log('Attempting Supabase insert');
+      const { data, error } = await supabase
+        .from('waiting_list')
+        .insert([{
+          name,
+          email,
+          features
+        }])
+        .select();
+        
+      console.log('Supabase result:', { data, error });
+      
+      if (error) {
+        console.error('Error saving to Supabase:', error);
+        return NextResponse.json(
+          { 
+            error: 'Failed to save your information. Please try again.',
+            details: error.message
+          },
+          { status: 500 }
+        );
+      }
+      
+      // Return success response
+      return NextResponse.json(
+        { 
+          message: 'Successfully joined the waitlist!',
+          success: true,
+          data
+        },
+        { status: 200 }
+      );
+    } catch (insertErr) {
+      console.error('Exception during Supabase insert:', insertErr);
+      return NextResponse.json(
+        { 
+          error: 'An unexpected error occurred while saving your information.',
+          details: insertErr instanceof Error ? insertErr.message : String(insertErr)
+        },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error('Waitlist submission error:', error);
     
     return NextResponse.json(
-      { error: 'Failed to process your request' },
+      { 
+        error: 'Failed to process your request',
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     );
   }
@@ -156,7 +161,7 @@ export async function GET(request: NextRequest) {
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(0, 5)
         .map(entry => ({
-          firstName: entry.firstName,
+          name: entry.name,
           signupDate: entry.createdAt
         }))
     },

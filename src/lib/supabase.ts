@@ -2,23 +2,36 @@ import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-if (!supabaseUrl || !supabaseKey) {
+if (!supabaseUrl) {
   if (typeof window === 'undefined') {
-    console.error('Supabase credentials are missing!');
+    console.error('Supabase URL is missing!');
   }
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!supabaseAnonKey) {
+  console.error('Supabase anon key is missing!');
+}
 
+if (!supabaseServiceKey && typeof window === 'undefined') {
+  console.error('Supabase service role key is missing!');
+}
+
+// Create a Supabase client for the browser (public operations)
+export const supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+
+// Create a Supabase admin client with service role key for server operations
+export const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+// Define waitlist entry type based on table structure
 export type WaitlistEntry = {
-  id?: string;
-  firstName: string;
+  id?: number;
+  name: string;
   email: string;
-  comments?: string;
-  createdAt?: string;
-  position: number;
+  features?: string;
+  created_at?: string;
 };
 
 /**
@@ -26,8 +39,12 @@ export type WaitlistEntry = {
  */
 export async function saveWaitlistEntry(entry: Omit<WaitlistEntry, 'id'>): Promise<{ success: boolean; error?: string; data?: any }> {
   try {
+    console.log('Saving entry to Supabase:', entry);
+    console.log('Using Supabase URL:', supabaseUrl);
+    console.log('Service key available:', !!supabaseServiceKey);
+    
     const { data, error } = await supabase
-      .from('waitlist')
+      .from('waiting_list')
       .insert([entry])
       .select();
 
@@ -39,7 +56,7 @@ export async function saveWaitlistEntry(entry: Omit<WaitlistEntry, 'id'>): Promi
     return { success: true, data };
   } catch (err) {
     console.error('Exception saving to Supabase:', err);
-    return { success: false, error: 'Failed to save waitlist entry' };
+    return { success: false, error: err instanceof Error ? err.message : 'Failed to save waitlist entry' };
   }
 }
 
@@ -49,9 +66,9 @@ export async function saveWaitlistEntry(entry: Omit<WaitlistEntry, 'id'>): Promi
 export async function getWaitlistEntries(): Promise<{ success: boolean; error?: string; data?: WaitlistEntry[] }> {
   try {
     const { data, error } = await supabase
-      .from('waitlist')
+      .from('waiting_list')
       .select('*')
-      .order('position', { ascending: true });
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching from Supabase:', error);
@@ -71,7 +88,7 @@ export async function getWaitlistEntries(): Promise<{ success: boolean; error?: 
 export async function getWaitlistCount(): Promise<{ success: boolean; error?: string; count: number }> {
   try {
     const { count, error } = await supabase
-      .from('waitlist')
+      .from('waiting_list')
       .select('*', { count: 'exact', head: true });
 
     if (error) {

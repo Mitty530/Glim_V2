@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [comments, setComments] = useState('')
+  const [name, setName] = useState('')
+  const [features, setFeatures] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
     success?: boolean;
@@ -39,25 +39,30 @@ export default function WaitlistForm() {
     setSubmitStatus({})
     
     try {
+      // Log the payload for debugging
+      const payload = { name, email, features };
+      console.log('Submitting waitlist form:', payload);
+      
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, firstName, comments }),
+        body: JSON.stringify(payload),
       })
       
       const data = await response.json()
+      console.log('API Response:', data); // For debugging
       
       if (response.ok) {
         setSubmitStatus({
           success: true,
-          message: data.message
+          message: data.message || 'Successfully joined the waitlist!'
         })
         // Clear form on success
         setEmail('')
-        setFirstName('')
-        setComments('')
+        setName('')
+        setFeatures('')
       } else {
         setSubmitStatus({
           success: false,
@@ -120,16 +125,17 @@ export default function WaitlistForm() {
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">
-                  First Name
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                  Name
                 </label>
                 <input
                   type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-900/60 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white"
-                  placeholder="Your first name"
+                  placeholder="Your name"
+                  required
                 />
               </div>
               
@@ -149,15 +155,15 @@ export default function WaitlistForm() {
               </div>
               
               <div>
-                <label htmlFor="comments" className="block text-sm font-medium text-gray-300 mb-1">
+                <label htmlFor="features" className="block text-sm font-medium text-gray-300 mb-1">
                   What features would you like to see?
                 </label>
                 <textarea
-                  id="comments"
-                  value={comments}
-                  onChange={(e) => setComments(e.target.value)}
+                  id="features"
+                  value={features}
+                  onChange={(e) => setFeatures(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-900/60 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white resize-none min-h-[100px]"
-                  placeholder="Tell us what features you're most excited to be added to Glim..."
+                  placeholder="Tell us what features you're most excited to see..."
                 />
               </div>
               
