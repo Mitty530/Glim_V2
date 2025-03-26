@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import React from 'react'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { AnimationProvider } from '@/components/providers/animation-provider'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
             {children}
           </AnimationProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
