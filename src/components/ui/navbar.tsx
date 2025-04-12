@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { ThemeToggle } from './theme-toggle'
 
 const navLinks = [
   { href: '#', label: 'Home' },
@@ -78,7 +77,7 @@ export function Navbar() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm py-3' 
+          ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -99,7 +98,7 @@ export function Navbar() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary flex items-center justify-center">
               <span className="text-white font-bold text-sm">GL</span>
             </div>
-            <span className="font-bold text-xl text-gray-900 dark:text-white">Glim</span>
+            <span className="font-bold text-xl text-gray-900">Glim</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -111,16 +110,13 @@ export function Navbar() {
                 className={`text-sm font-medium transition-colors hover:text-brand-primary ${
                   pathname === link.href 
                     ? 'text-brand-primary' 
-                    : 'text-gray-700 dark:text-gray-200'
+                    : 'text-gray-700'
                 }`}
                 onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.label}
               </Link>
             ))}
-            
-            {/* Theme Toggle */}
-            <ThemeToggle />
             
             {/* CTA Button */}
             <Link
@@ -135,7 +131,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             id="menu-button"
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -171,7 +167,7 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             id="mobile-menu"
-            className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg"
+            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -185,7 +181,7 @@ export function Navbar() {
                   className={`block py-2 text-base font-medium transition-colors hover:text-brand-primary ${
                     pathname === link.href 
                       ? 'text-brand-primary' 
-                      : 'text-gray-700 dark:text-gray-200'
+                      : 'text-gray-700'
                   }`}
                   onClick={(e) => handleNavClick(e, link.href)}
                 >
@@ -201,11 +197,6 @@ export function Navbar() {
               >
                 Join Waitlist
               </Link>
-              
-              {/* Mobile Theme Toggle */}
-              <div className="flex justify-center mt-4">
-                <ThemeToggle />
-              </div>
             </div>
           </motion.div>
         )}

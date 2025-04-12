@@ -16,13 +16,13 @@
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
  
-    --secondary: 187.1 97.1% 45.1%;
+    --secondary: 142 60% 45%;
     --secondary-foreground: 210 40% 98%;
  
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
  
-    --accent: 37.7 92.7% 65.1%;
+    --accent: 142 70% 60%;
     --accent-foreground: 0 0% 0%;
  
     --destructive: 0 84.2% 60.2%;
@@ -30,9 +30,28 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --ring: 142 60% 45%;
  
     --radius: 0.5rem;
+
+    /* New color scheme variables */
+    --color-background-primary: 140, 30%, 97%;
+    --color-background-secondary: 142, 40%, 95%;
+    --color-background-tertiary: 145, 40%, 93%;
+    
+    --color-accent-light: 140, 35%, 94%, 0.7;
+    --color-accent-medium: 142, 40%, 90%, 0.8;
+    
+    /* Gradient backgrounds */
+    --gradient-soft-blue: linear-gradient(135deg, hsl(152, 80%, 97%) 0%, hsl(160, 70%, 95%) 100%);
+    --gradient-soft-purple: linear-gradient(135deg, hsl(140, 65%, 97%) 0%, hsl(150, 60%, 95%) 100%);
+    --gradient-soft-green: linear-gradient(135deg, hsl(142, 85%, 97%) 0%, hsl(146, 75%, 95%) 100%);
+    --gradient-soft-beige: linear-gradient(135deg, hsl(140, 70%, 98%) 0%, hsl(150, 65%, 96%) 100%);
+    --gradient-soft-nature: linear-gradient(135deg, hsl(146, 75%, 96%) 0%, hsl(158, 65%, 94%) 100%);
+    
+    /* Card backgrounds */
+    --card-bg-primary: 0, 0%, 100%;
+    --card-bg-secondary: 142, 20%, 98%;
   }
  
   .dark {
@@ -48,21 +67,40 @@
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
  
-    --secondary: 187.1 97.1% 45.1%;
+    --secondary: 142 50% 40%;
     --secondary-foreground: 210 40% 98%;
  
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
  
-    --accent: 37.7 92.7% 65.1%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 142 60% 40%;
+    --accent-foreground: 0 0% 100%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
  
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --ring: 142 50% 40%;
+
+    /* Dark mode color scheme variables */
+    --color-background-primary: 142, 25%, 12%;
+    --color-background-secondary: 143, 25%, 10%;
+    --color-background-tertiary: 145, 25%, 8%;
+    
+    --color-accent-light: 140, 20%, 18%, 0.7;
+    --color-accent-medium: 142, 20%, 15%, 0.8;
+    
+    /* Dark mode gradient backgrounds */
+    --gradient-soft-blue: linear-gradient(135deg, hsl(152, 30%, 15%) 0%, hsl(160, 35%, 12%) 100%);
+    --gradient-soft-purple: linear-gradient(135deg, hsl(140, 25%, 15%) 0%, hsl(150, 30%, 12%) 100%);
+    --gradient-soft-green: linear-gradient(135deg, hsl(142, 35%, 15%) 0%, hsl(146, 35%, 12%) 100%);
+    --gradient-soft-beige: linear-gradient(135deg, hsl(140, 15%, 15%) 0%, hsl(150, 20%, 12%) 100%);
+    --gradient-soft-nature: linear-gradient(135deg, hsl(146, 30%, 12%) 0%, hsl(158, 35%, 10%) 100%);
+    
+    /* Dark mode card backgrounds */
+    --card-bg-primary: 142, 14%, 12%;
+    --card-bg-secondary: 143, 16%, 10%;
   }
 }
  
@@ -72,6 +110,57 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* New utility classes for the color scheme */
+@layer utilities {
+  .bg-base {
+    background-color: hsl(var(--color-background-primary));
+  }
+  
+  .bg-secondary {
+    background-color: hsl(var(--color-background-secondary));
+  }
+  
+  .bg-tertiary {
+    background-color: hsl(var(--color-background-tertiary));
+  }
+  
+  .bg-gradient-blue {
+    background-image: var(--gradient-soft-blue);
+  }
+  
+  .bg-gradient-purple {
+    background-image: var(--gradient-soft-purple);
+  }
+  
+  .bg-gradient-green {
+    background-image: var(--gradient-soft-green);
+  }
+  
+  .bg-gradient-beige {
+    background-image: var(--gradient-soft-beige);
+  }
+  
+  .bg-gradient-nature {
+    background-image: var(--gradient-soft-nature);
+  }
+  
+  .bg-card-primary {
+    background-color: hsl(var(--card-bg-primary));
+  }
+  
+  .bg-card-secondary {
+    background-color: hsl(var(--card-bg-secondary));
+  }
+  
+  .bg-accent-light {
+    background-color: hsla(var(--color-accent-light));
+  }
+  
+  .bg-accent-medium {
+    background-color: hsla(var(--color-accent-medium));
   }
 }
 
@@ -92,22 +181,252 @@
   font-display: swap;
 }
 
+/* Load premium fonts */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscotext-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscotext-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global styles */
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+/* Ensure normal cursor behavior */
+body, a, button, input, textarea, select {
+  cursor: auto !important;
+}
+
 /* Custom cursor styling */
 .custom-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(212, 175, 55, 0.5);
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 9999;
-  transition: transform 0.2s;
-  mix-blend-mode: difference;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  will-change: transform;
+  transform-origin: center;
+  backdrop-filter: blur(0px);
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 0 8px rgba(60, 165, 92, 0.3));
+}
+
+/* Add pointer cursor style for buttons and links */
+.cursor-pointer-style {
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%233ca55c' stroke='%233ca55c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/%3E%3Cpath d='m13 13 6 6'/%3E%3C/svg%3E") !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  opacity: 1 !important;
+  border: none !important;
+  filter: drop-shadow(0 0 4px rgba(60, 165, 92, 0.5)) !important;
 }
 
 .custom-cursor.hover {
-  transform: scale(2);
-  background-color: rgba(0, 119, 181, 0.5);
+  mix-blend-mode: normal;
+  transform: scale(1.5);
+}
+
+/* Cursor text styling */
+.custom-cursor span.cursor-text {
+  color: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translateY(5px);
+  letter-spacing: 0.5px;
+  background-color: rgba(60, 165, 92, 0.8);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: white;
+  pointer-events: none;
+}
+
+.custom-cursor.cursor-text-visible span.cursor-text {
+  opacity: 1;
+}
+
+/* Cursor glow effect for buttons */
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle, rgba(60, 165, 92, 0.2), transparent 60%);
+}
+
+.custom-cursor:hover::after {
+  opacity: 0.5;
+}
+
+/* Hide default cursor on elements that need custom cursor */
+html:has(#custom-cursor) {
+  cursor: none !important;
+}
+
+html:has(#custom-cursor) a, 
+html:has(#custom-cursor) button,
+html:has(#custom-cursor) [role="button"], 
+html:has(#custom-cursor) .cursor-pointer {
+  cursor: none !important;
+}
+
+/* Ensure clickable elements remain visible with custom cursor */
+html:has(#custom-cursor) a:hover, 
+html:has(#custom-cursor) button:hover,
+html:has(#custom-cursor) [role="button"]:hover, 
+html:has(#custom-cursor) .cursor-pointer:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Use normal cursor on input fields and form elements */
+html:has(#custom-cursor) input,
+html:has(#custom-cursor) textarea,
+html:has(#custom-cursor) select,
+html:has(#custom-cursor) .normal-cursor {
+  cursor: auto !important;
+}
+
+/* Only use the custom cursor on larger screens */
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none !important;
+  }
+  
+  html:has(#custom-cursor),
+  html:has(#custom-cursor) a, 
+  html:has(#custom-cursor) button,
+  html:has(#custom-cursor) [role="button"], 
+  html:has(#custom-cursor) .cursor-pointer {
+    cursor: auto !important;
+  }
+}
+
+/* Enhanced relationship memory pulse effect */
+.memory-pulse {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: memoryPulse 3s ease-out infinite;
+  background: rgba(60, 165, 92, 0.2);
+  z-index: -1;
+}
+
+@keyframes memoryPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* Connection trail effect */
+.connection-trail {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9990;
+}
+
+.connection-dot {
+  position: absolute;
+  background-color: rgba(60, 165, 92, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fadeTrail {
+  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+}
+
+/* Animations for FAQ items */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Nature theme */
+.leaf-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Subtle noise texture */
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Glass effect for cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* Smooth scrolling */
@@ -159,3 +478,106 @@ html.dark {
   animation: shine 2s ease-in-out infinite;
   animation-delay: 0.5s;
 } 
+
+/* Nature theme animations */
+@keyframes floatLeaf {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5px, -10px) rotate(5deg);
+  }
+  50% {
+    transform: translate(10px, 5px) rotate(-5deg);
+  }
+  75% {
+    transform: translate(-5px, 10px) rotate(8deg);
+  }
+}
+
+.animate-float-leaf {
+  animation: floatLeaf 8s ease-in-out infinite;
+}
+
+/* Growing effect */
+@keyframes grow {
+  from {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-grow {
+  animation: grow 1.5s ease-out;
+}
+
+/* Button hover effects */
+.nature-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.nature-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.nature-button:hover::after {
+  left: 100%;
+} 
+
+/* New animation for subtle pulsing effect */
+@keyframes pulse-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Specific styles for leaf pattern with green hue */
+.leaf-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Define green soft gradients for all sections */
+.bg-soft-green-gradient {
+  background: var(--gradient-soft-green);
+}
+
+.bg-soft-beige-gradient {
+  background: var(--gradient-soft-beige);
+}
+
+.bg-soft-nature-gradient {
+  background: var(--gradient-soft-nature);
+}
+
+.bg-soft-blue-gradient {
+  background: var(--gradient-soft-blue);
+}
+
+.bg-soft-purple-gradient { 
+  background: var(--gradient-soft-purple);
+}

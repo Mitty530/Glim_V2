@@ -48,6 +48,16 @@ const WaitlistCTA = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
+          <motion.div 
+            className="mb-5"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <p className="text-lg md:text-xl font-semibold bg-gradient-to-r from-red-500 to-red-600 text-transparent bg-clip-text inline-block px-6 py-2 rounded-full border border-red-200/50 shadow-sm">
+              The best closers don't have better memory. They have better systems.
+            </p>
+          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#D4AF37] to-[#0077B5] bg-clip-text text-transparent">
             Be the First to Know
           </h2>

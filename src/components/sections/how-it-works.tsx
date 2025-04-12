@@ -129,10 +129,10 @@ function MockupUI({ step, color, icon, content }: { step: number, color: string,
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-gray-900/80 backdrop-blur-lg rounded-xl overflow-hidden shadow-xl border border-gray-800 transform-gpu">
+      <div className="bg-white/80 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg border border-gray-200 transform-gpu">
         {/* Window header with float effect */}
         <motion.div 
-          className="flex items-center justify-between px-4 py-3 border-b border-gray-800 bg-black/40"
+          className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-100/90"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -142,7 +142,7 @@ function MockupUI({ step, color, icon, content }: { step: number, color: string,
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <div className="text-xs text-gray-400">Glim App</div>
+          <div className="text-xs text-gray-600">Glim App</div>
           <div className="w-6"></div>
         </motion.div>
         
@@ -184,9 +184,9 @@ function MockupUI({ step, color, icon, content }: { step: number, color: string,
                 className="flex items-center justify-center mb-3"
                 variants={contentRevealVariants}
               >
-                <div className="h-2 bg-gray-800 rounded-full overflow-hidden w-full max-w-md">
+                <div className="h-2 bg-gray-200 rounded-full overflow-hidden w-full max-w-md">
                   <motion.div 
-                    className="h-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                    className="h-full bg-gradient-to-r from-brand-primary to-brand-accent"
                     animate={{ 
                       width: ["0%", "100%", "30%", "80%", "60%", "100%"],
                       transition: { 
@@ -203,7 +203,7 @@ function MockupUI({ step, color, icon, content }: { step: number, color: string,
           
           {/* Captured text area with typing effect */}
           <motion.div 
-            className="bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 text-gray-300 text-sm font-mono shadow-inner border border-gray-700/50"
+            className="bg-gray-100/90 backdrop-blur-sm rounded-lg p-4 text-gray-700 text-sm font-mono shadow-inner border border-gray-300/50"
             variants={contentRevealVariants}
             style={{ 
               transformStyle: "preserve-3d", 
@@ -307,89 +307,24 @@ export function HowItWorks() {
   return (
     <motion.section 
       ref={sectionRef}
-      className="py-24 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900 overflow-hidden relative"
+      className="py-24 relative overflow-hidden"
       id="how-it-works"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       style={{ perspective: 1000 }}
     >
-      {/* Enhanced background elements with parallax motion */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <motion.div 
-          className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent"
-          style={{ 
-            opacity: bgOpacity,
-            backgroundPosition: `${gradient1X}% ${gradient1Y}%` 
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"
-          style={{ 
-            opacity: bgOpacity,
-            backgroundPosition: `${gradient2X}% ${gradient2Y}%` 
-          }}
-        />
-        
-        {/* Floating elements in background */}
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-indigo-500/5 blur-3xl"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-1/3 right-1/5 w-96 h-96 rounded-full bg-purple-500/5 blur-3xl"
-          animate={{
-            x: [0, -30, 0],
-            y: [0, -20, 0],
-            scale: [1, 1.2, 1],
-            rotate: [0, -5, 0]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        />
-      </div>
+      <div className="absolute inset-0 bg-gradient-radial from-brand-light/5 to-transparent"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section header with 3D perspective */}
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-24"
-          style={{ 
-            opacity, 
-            y,
-            scale,
-            rotateX,
-            transformPerspective: "1000px",
-            transformStyle: "preserve-3d"
-          }}
-        >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white to-purple-300"
-            variants={textVariants}
-          >
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
             How Glim Works
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-300/90 max-w-2xl mx-auto"
-            variants={textVariants}
-          >
-            Transform your notes into actionable insights in three simple steps
-          </motion.p>
-        </motion.div>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Turn your meetings and conversations into intelligent, structured contact information in seconds
+          </p>
+        </div>
         
         {/* Enhanced step layout with 3D cards */}
         <motion.div 

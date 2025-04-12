@@ -1,16 +1,21 @@
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import React from 'react'
+import { Inter, Montserrat } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { AnimationProvider } from '@/components/providers/animation-provider'
 import { Analytics } from '@vercel/analytics/react'
+import CustomCursor from '@/components/ui/custom-cursor'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+})
 
 export const metadata: Metadata = {
-  title: 'AI Networking Assistant',
-  description: 'Transform your networking experience with AI-powered contact management',
+  title: 'Glim - AI Relationship Memory Engine',
+  description: 'An AI-powered relationship memory engine that helps you maintain meaningful connections with your network and never miss a follow-up opportunity.',
 }
 
 export default function RootLayout({
@@ -19,12 +24,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <html lang="en" className={cn("scroll-smooth", montserrat.variable)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
+        <ThemeProvider>
           <AnimationProvider>
             {children}
           </AnimationProvider>
+          <CustomCursor />
         </ThemeProvider>
         <Analytics />
       </body>

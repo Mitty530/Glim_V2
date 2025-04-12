@@ -1,11 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
+import AiFaq from '../sections/ai-faq.tsx'
+
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+      <AiFaq />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col items-center md:flex-row md:justify-between">
           {/* Brand */}

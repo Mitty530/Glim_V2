@@ -1,157 +1,108 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const AiDemoSection = () => {
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2 
-          className="text-4xl md:text-5xl font-bold text-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          See AI in Action
-        </motion.h2>
-        
-        <motion.p 
-          className="text-xl text-center max-w-2xl mx-auto mb-16 text-gray-600"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Our advanced AI transforms scattered information into organized, actionable insights
-        </motion.p>
-        
-        <motion.div 
-          className="h-[400px] rounded-2xl overflow-hidden shadow-2xl relative bg-gradient-to-r from-slate-50 to-gray-100"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {/* AI Flow Visualization */}
-          <div className="absolute inset-0 flex items-center justify-between px-16">
-            {/* Voice Input */}
-            <motion.div 
-              className="flex flex-col items-center"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center text-white mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2a6 6 0 0 0-6 6h12a6 6 0 0 0-6-6z"/>
-                </svg>
-              </div>
-              <span className="font-medium text-gray-800">Voice Input</span>
-              <div className="mt-2 animate-pulse">
-                <div className="h-1 w-8 bg-[#D4AF37] rounded-full mx-1 inline-block"></div>
-                <div className="h-2 w-10 bg-[#D4AF37] rounded-full mx-1 inline-block"></div>
-                <div className="h-3 w-6 bg-[#D4AF37] rounded-full mx-1 inline-block"></div>
-                <div className="h-2 w-12 bg-[#D4AF37] rounded-full mx-1 inline-block"></div>
-                <div className="h-1 w-8 bg-[#D4AF37] rounded-full mx-1 inline-block"></div>
-              </div>
-            </motion.div>
-            
-            {/* Connection Line 1 */}
-            <motion.div 
-              className="h-[2px] flex-1 bg-gray-300 mx-4 relative"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <motion.div 
-                className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 rounded-full bg-[#0077B5]"
-                initial={{ left: 0 }}
-                animate={{ left: '100%' }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: 'loop' }}
-              />
-            </motion.div>
-            
-            {/* AI Processing */}
-            <motion.div 
-              className="flex flex-col items-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#0077B5] p-[2px] rotate-45 mb-4">
-                <div className="w-full h-full bg-white flex items-center justify-center -rotate-45">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#0077B5" viewBox="0 0 16 16">
-                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
-                  </svg>
-                </div>
-              </div>
-              <span className="font-medium text-gray-800">AI Processing</span>
-              <div className="mt-2 grid grid-cols-3 gap-1">
-                <div className="h-1 w-1 bg-[#0077B5] rounded-full animate-ping"></div>
-                <div className="h-1 w-1 bg-[#0077B5] rounded-full animate-ping" style={{animationDelay: '300ms'}}></div>
-                <div className="h-1 w-1 bg-[#0077B5] rounded-full animate-ping" style={{animationDelay: '600ms'}}></div>
-              </div>
-            </motion.div>
-            
-            {/* Connection Line 2 */}
-            <motion.div 
-              className="h-[2px] flex-1 bg-gray-300 mx-4 relative"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <motion.div 
-                className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 rounded-full bg-[#D4AF37]"
-                initial={{ left: 0 }}
-                animate={{ left: '100%' }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: 'loop', delay: 0.5 }}
-              />
-            </motion.div>
-            
-            {/* Organized Output */}
-            <motion.div 
-              className="flex flex-col items-center"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <div className="w-24 h-24 rounded-md bg-gradient-to-br from-[#0077B5] to-[#00A0B0] flex items-center justify-center text-white mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3z"/>
-                </svg>
-              </div>
-              <span className="font-medium text-gray-800">Organized Output</span>
-              <div className="mt-2 w-20">
-                <motion.div 
-                  className="h-1 w-full bg-[#0077B5] rounded-full mb-1"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.3, delay: 1.0 }}
-                ></motion.div>
-                <motion.div 
-                  className="h-1 w-full bg-[#0077B5] rounded-full mb-1"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.3, delay: 1.1 }}
-                ></motion.div>
-                <motion.div 
-                  className="h-1 w-full bg-[#0077B5] rounded-full"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.3, delay: 1.2 }}
-                ></motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-gray-500 italic">
-            AI-powered analysis delivers contextually relevant information
+    <section className="py-20 overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">AI-Powered Relationship Intelligence</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            See how Glim transforms your relationship management with advanced AI technology
           </p>
+        </div>
+
+        {/* AI Features Grid - Replacing the duplicated stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {/* AI Feature 1 */}
+          <motion.div 
+            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 001.5 2.25m0-7.964c.249.023.499.05.749.082M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Real-time Insights</h3>
+            <p className="text-gray-600">
+              Get instant analysis of relationships, interests, and opportunities as they develop
+            </p>
+          </motion.div>
+          
+          {/* AI Feature 2 */}
+          <motion.div 
+            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Personalized Outreach</h3>
+            <p className="text-gray-600">
+              AI suggests conversation starters and follow-ups based on relationship context
+            </p>
+          </motion.div>
+          
+          {/* AI Feature 3 */}
+          <motion.div 
+            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Intent Recognition</h3>
+            <p className="text-gray-600">
+              Automatically identify high-intent signals from your contacts' digital behavior
+            </p>
+          </motion.div>
+          
+          {/* AI Feature 4 */}
+          <motion.div 
+            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Relationship Analytics</h3>
+            <p className="text-gray-600">
+              Track engagement patterns and relationship strength with visual analytics
+            </p>
+          </motion.div>
+        </div>
+        
+        {/* AI Demo CTA */}
+        <div className="mt-12 text-center">
+          <motion.button
+            className="bg-[#16543a] text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-[#0d3826] transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Schedule a Demo
+          </motion.button>
+          <p className="text-gray-600 mt-4">See how our AI can transform your relationship management</p>
         </div>
       </div>
     </section>
   )
 }
 
-export default AiDemoSection 
+export default AiDemoSection

@@ -1,11 +1,26 @@
 'use client'
 
-import { ReactNode, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-export function AnimationProvider({ children }: { children: ReactNode }) {
+type AnimationContextType = {
+  hasScrolled: boolean
+}
+
+const AnimationContext = createContext<AnimationContextType>({
+  hasScrolled: false
+})
+
+export const useAnimation = () => useContext(AnimationContext)
+
+export function AnimationProvider({ children }: { children: React.ReactNode }) {
+  const [hasScrolled, setHasScrolled] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
   useEffect(() => {
+    setIsMounted(true)
+    
     // Register GSAP plugins
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger)
@@ -37,5 +52,31 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  return <>{children}</>
+  useEffect(() => {
+    if (!isMounted) return;
+    
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setHasScrolled(true)
+      } else {
+        setHasScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isMounted])
+
+  return (
+    <AnimationContext.Provider
+      value={{
+        hasScrolled
+      }}
+    >
+      {children}
+    </AnimationContext.Provider>
+  )
 } 
