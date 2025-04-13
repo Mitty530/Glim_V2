@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
 
 // Define types for feature items
 interface FeatureItem {
@@ -131,42 +132,53 @@ const defaultFeatures: FeatureItem[] = [
   }
 ];
 
-export const AnimatedFeatureList: React.FC<AnimatedFeatureListProps> = ({ 
+// Create a client-side only version of the feature list
+const AnimatedFeatureList: React.FC<AnimatedFeatureListProps> = ({ 
   features = defaultFeatures,
   className = ""
 }) => {
-  // Duplicate the features array to create a seamless loop
+  const [isPaused, setIsPaused] = useState(false);
   const duplicatedFeatures = [...features, ...features];
   
   return (
-    <div className={`relative overflow-hidden h-[200px] ${className}`}>
+    <div 
+      className={`relative overflow-hidden h-[500px] ${className}`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <motion.div
-        className="flex flex-col space-y-3"
-        animate={{
-          y: [0, -800], // Reduced scroll distance
+        className="flex flex-col space-y-4"
+        animate={isPaused ? { y: 0 } : {
+          y: [0, -800],
         }}
         transition={{
           y: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: 15, // Faster animation
+            duration: 20,
             ease: "linear",
           },
         }}
+        style={{ paddingTop: "20px", paddingBottom: "20px" }}
       >
         {duplicatedFeatures.map((feature, index) => (
           <motion.div
-            key={index}
-            className="bg-white rounded-lg shadow-md p-3 flex items-start gap-3 hover:shadow-lg transition-shadow duration-300"
-            whileHover={{ scale: 1.02 }}
+            key={`feature-${index}`}
+            className="bg-white/98 backdrop-blur-md rounded-3xl shadow-md p-7 flex items-start gap-5 hover:shadow-2xl transition-all duration-300 mx-4 border border-gray-100/30"
+            whileHover={{ 
+              scale: 1.02,
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              boxShadow: "0 25px 30px -12px rgba(0, 0, 0, 0.15), 0 18px 20px -15px rgba(0, 0, 0, 0.1)",
+              transition: { duration: 0.4, ease: "easeOut" }
+            }}
           >
             {feature.icon && (
-              <div className="text-[#0a1a2f] flex-shrink-0 w-6 h-6">
+              <div className="text-indigo-600 flex-shrink-0 w-10 h-10 bg-indigo-50 rounded-2xl flex items-center justify-center p-2 shadow-sm">
                 {feature.icon}
               </div>
             )}
             <div>
-              <p className="text-gray-800 font-medium text-sm">{feature.text}</p>
+              <p className="text-gray-900 font-semibold text-lg leading-relaxed">{feature.text}</p>
             </div>
           </motion.div>
         ))}
@@ -175,16 +187,28 @@ export const AnimatedFeatureList: React.FC<AnimatedFeatureListProps> = ({
   );
 };
 
+// Create a client-side only version with no SSR
+const ClientOnlyAnimatedFeatureList = dynamic(
+  () => Promise.resolve(AnimatedFeatureList),
+  { ssr: false }
+);
+
 export function WaveGoodbyeSection() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
-    <section className="py-16 relative overflow-hidden bg-white" style={{borderRadius: "18px"}}>
+    <section className="py-16 relative overflow-hidden bg-gradient-to-b from-white to-gray-50" style={{borderRadius: "24px"}}>
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg width="100%" height="100%" className="absolute inset-0">
           <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M0 0 L40 0 L40 40 L0 40 Z" fill="none" stroke="#0a1a2f" strokeWidth="0.5" />
           </pattern>
-          <rect width="100%" height="100%" fill="white"  style={{borderRadius: "10px"}}/>
+          <rect width="100%" height="100%" fill="white" style={{borderRadius: "24px"}}/>
         </svg>
       </div>
       
@@ -193,48 +217,48 @@ export function WaveGoodbyeSection() {
           {/* Left content - Headline and CTA */}
           <div className="lg:w-1/2 lg:sticky lg:top-32 pt-8">
             <div className="max-w-lg">
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-6"
-              >
-                <div className="flex items-center gap-2 mb-10">
-                  <svg className="w-6 h-6 text-[#0a1a2f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                  <span className="text-[#0a1a2f] font-medium">Features</span>
+              {isClient && (
+                <div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-6"
+                  >
+                    <div className="flex items-center gap-2 mb-10">
+                      <svg className="w-6 h-6 text-[#0a1a2f]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                      </svg>
+                      <span className="text-[#0a1a2f] font-medium">Features</span>
+                    </div>
+                  </motion.div>
+
+                  <motion.h1 
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-10 text-[#0a1a2f] tracking-tight leading-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                  >
+                    👋 Say hello to...
+                  </motion.h1>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+                    className="mt-10 md:mt-16"
+                  />
                 </div>
-              </motion.div>
-
-              <motion.h1 
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-10 text-[#0a1a2f] tracking-tight leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-              >
-                👋 Say hello to...
-              </motion.h1>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="mt-10 md:mt-16"
-              >
-
-
-
-              </motion.div>
+              )}
             </div>
           </div>
           
           {/* Right content - Feature cards */}
           <div className="lg:w-1/2">
-            <AnimatedFeatureList />
+            {isClient && <ClientOnlyAnimatedFeatureList />}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 } 
