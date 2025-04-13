@@ -54,178 +54,129 @@ export function HeroSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#f8f9ff] to-white"
       id="home"
     >
-      <AnimatedBackground />
-      
-      <div className="absolute inset-0 z-10 bg-black/60" />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.015]" />
       
       <div className="container mx-auto px-4 z-20 relative py-20">
-        <motion.div 
-          style={{ y, opacity, scale }} 
-          className="max-w-4xl mx-auto text-center"
-        >
+        <div className="flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
+          {/* Left Content */}
           <motion.div 
-            {...fadeIn}
-            className="mb-12"
-          >
-            <motion.span 
-              className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-lg md:text-xl font-medium tracking-wide rounded-full px-8 py-3 border border-brand-primary/30 shadow-lg shadow-brand-primary/10 inline-block"
-              whileHover={{ 
-                y: -3, 
-                boxShadow: "0 10px 25px rgba(60, 165, 92, 0.2)",
-                transition: { duration: 0.2 }
-              }}
-            >
-              The human brain was never meant to be a CRM
-            </motion.span>
-          </motion.div>
-          
-          <motion.div 
+            className="flex-1 text-left"
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="mb-16"
           >
+            <motion.div 
+              variants={fadeInUp}
+              className="mb-8"
+            >
+              <span className="text-[#4F46E5] font-medium text-lg">
+                The human brain was never meant to be a CRM
+              </span>
+            </motion.div>
+            
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight mb-10"
-              style={{ 
-                letterSpacing: '-0.02em',
-                textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-              }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6"
             >
-              <motion.span 
-                className="block mb-4 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent"
-                whileHover={{ scale: 1.02 }}
-              >
-                Glim is an AI
-              </motion.span>
-              <motion.span 
-                className="block bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary bg-clip-text text-transparent"
-                whileHover={{ scale: 1.02 }}
-              >
+              Glim is an AI
+              <span className="text-[#4F46E5] block mt-2">
                 Relationship Memory
-              </motion.span>
-              <motion.span 
-                className="block mt-4 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent"
-                whileHover={{ scale: 1.02 }}
-              >
-                Engine.
-              </motion.span>
+              </span>
+              Engine.
             </motion.h1>
             
             <motion.p
               variants={fadeInUp}
-              className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-gray-600 mb-8 max-w-2xl"
             >
-              Stop losing opportunities because you forgot what mattered. 
-              <span className="block mt-4 text-brand-primary">
+              Stop losing opportunities because you forgot what mattered.
+              <span className="block mt-2 text-[#4F46E5]">
                 That great connection you made last month? It's fading from memory right now.
               </span>
             </motion.p>
         
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              className="flex flex-wrap gap-4"
             >
-              <motion.div 
-                whileHover={{ scale: 1.05, y: -5 }} 
-                whileTap={{ scale: 0.97 }}
+              <Link 
+                href="#waitlist"
+                className="bg-[#4F46E5] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#4338CA] transition-all duration-200 inline-flex items-center gap-2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const waitlistSection = document.getElementById('waitlist');
+                  if (waitlistSection) {
+                    waitlistSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
-                <Link 
-                  href="#waitlist"
-                  className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-medium py-4 px-10 rounded-full inline-flex items-center justify-center shadow-lg shadow-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-300 group text-lg"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const waitlistSection = document.getElementById('waitlist');
-                    if (waitlistSection) {
-                      waitlistSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <span>Join Waitlist</span>
-                  <svg 
-                    className="w-6 h-6 ml-2 transition-all duration-300 group-hover:rotate-45 group-hover:translate-x-1" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor"
-                  >
-                    <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
-                  </svg>
-                </Link>
-              </motion.div>
-              
-              <motion.div 
-                whileHover={{ scale: 1.05, y: -5 }} 
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link 
-                  href="#how-it-works"
-                  className="bg-white/10 backdrop-blur-sm text-white font-medium py-4 px-10 rounded-full inline-flex items-center justify-center border border-white/20 hover:bg-white/20 transition-all duration-300 group text-lg"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const howItWorksSection = document.getElementById('how-it-works');
-                    if (howItWorksSection) {
-                      howItWorksSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <span>How It Works</span>
-                  <svg 
-                    className="w-6 h-6 ml-2 transition-all duration-300 group-hover:translate-y-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </Link>
-              </motion.div>
+                Try for free
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </motion.div>
           </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="mt-16"
+
+          {/* Right Content - Smart Card Preview */}
+          <motion.div 
+            className="flex-1 relative"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex justify-center items-center space-x-6">
-              <div className="flex -space-x-3">
-                {["SL", "JD", "AR", "+"].map((initials, i) => (
-                  <motion.div 
-                    key={initials}
-                    className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-primary text-sm font-medium shadow-md border border-brand-primary/10"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.9 + i * 0.1 }}
-                    whileHover={{ y: -2, scale: 1.1, zIndex: 10 }}
-                  >
-                    {initials}
-                  </motion.div>
-                ))}
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-purple-200 rounded-full blur-2xl opacity-20" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200 rounded-full blur-2xl opacity-20" />
+              
+              {/* Smart Card Preview */}
+              <div className="bg-[#1a1d29] rounded-2xl shadow-2xl overflow-hidden border border-purple-500/10 p-6 relative backdrop-blur-xl">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <svg className="w-6 h-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-white/90 font-medium">Smart Contact Intelligence</span>
+                  </div>
+                  <div className="flex space-x-1">
+                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <div className="w-3 h-3 rounded-full bg-green-400" />
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400 font-bold text-xl">
+                      AC
+                    </div>
+                    <div>
+                      <h3 className="text-white text-lg font-semibold">Alex Chen</h3>
+                      <p className="text-gray-400">Chief Technology Officer</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-purple-900/20 rounded-lg p-4 border border-purple-500/10">
+                    <h4 className="text-gray-300 font-medium mb-2 text-sm uppercase">NOTES</h4>
+                    <p className="text-gray-400 text-sm">
+                      Last meeting: Discussed AI integration possibilities. Follow up next week.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 text-xs rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">AI/ML</span>
+                    <span className="px-3 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Enterprise</span>
+                  </div>
+                </div>
               </div>
-              <motion.div 
-                className="text-lg font-medium text-gray-400"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.3 }}
-              >
-                <motion.span 
-                  className="font-semibold text-xl inline-block"
-                  animate={{ 
-                    color: ["#3ca55c", "#52c234", "#3ca55c"],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  250+
-                </motion.span>
-                <span className="ml-2">business professionals already on the waitlist</span>
-              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
       
       <div className="absolute bottom-0 left-0 right-0 h-32 z-0 overflow-hidden">
