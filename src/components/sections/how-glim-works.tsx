@@ -126,8 +126,8 @@ const getImportanceStyles = (importance: string | undefined) => { // Add type an
 };
 
 // Tab Data: Define the content for the THREE tabs in the desired order
-const tabs = [
-    {
+    const tabs = [
+        {
       id: 'overview',
       label: 'Memory Capture',
       icon: Eye,
@@ -511,8 +511,8 @@ const CardInsight: React.FC = () => {
         <div className="flex items-center gap-2">
           <motion.div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(52,211,153,0.5)]" animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 1.5, repeat: Infinity }} />
           <span className="text-xs font-medium text-emerald-400">AI Memory Engine Active</span>
-        </div>
-      </div>
+                                            </div>
+                                        </div>
 
       {/* Header - Applying Importance Styles */}
       <div className={`bg-gradient-to-br from-gray-800 ${importanceStyles.headerGradientVia} to-gray-900 px-6 py-5 flex justify-between items-center`}>
@@ -540,9 +540,9 @@ const CardInsight: React.FC = () => {
                 <Star size={18} fill={isStarred ? "currentColor" : "none"} />
               </motion.button>
               <span className="text-gray-400 text-sm">{contactInfo.connectionDate}</span>
-            </div>
-          </div>
-        </div>
+                                    </div>
+                                </div>
+                            </div>
         {/* Importance Tag */}
         <div>
           <motion.div
@@ -551,8 +551,8 @@ const CardInsight: React.FC = () => {
           >
             {contactInfo.valueTag} ({contactInfo.importance})
           </motion.div>
-        </div>
-      </div>
+                                </div>
+                            </div>
 
       {/* Essential Contact Details Grid */}
       <div className="bg-gray-800/50 px-4 py-3 grid grid-cols-1 gap-3 border-b border-gray-700/40 sm:grid-cols-2">
@@ -565,14 +565,14 @@ const CardInsight: React.FC = () => {
           <motion.div key={index} className="flex items-center gap-3 group transition-all duration-300 hover:bg-gray-700/30 p-2.5 rounded-lg cursor-pointer" variants={hoverScaleSlight} whileHover="hover" whileTap="tap">
             <div className="w-9 h-9 rounded-lg bg-gray-700/40 flex items-center justify-center shrink-0 group-hover:bg-emerald-600/20 transition-colors duration-300 border border-gray-600/50 group-hover:border-emerald-500/50">
               <item.icon size={16} className="text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300" />
-            </div>
+                                    </div>
             <div className="flex flex-col overflow-hidden">
               <span className="text-xs text-gray-400">{item.label}</span>
               <span className="text-sm text-gray-100 group-hover:text-white transition-colors duration-300 truncate">{item.value}</span>
-            </div>
+                                            </div>
           </motion.div>
         ))}
-      </div>
+                                            </div>
 
       {/* Tab Navigation */}
       <div className="flex border-b border-gray-700/60 bg-gray-850 sticky top-0 z-20 shadow-sm">
@@ -601,7 +601,7 @@ const CardInsight: React.FC = () => {
             )}
           </button>
         ))}
-      </div>
+                                        </div>
 
       {/* Tab Content Area */}
       <div className="overflow-y-auto max-h-full scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-850/20 relative bg-gray-900/70">
@@ -620,7 +620,7 @@ const CardInsight: React.FC = () => {
                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                          Filter Actions
                      </motion.button>
-                  </div>
+                                    </div>
                   <motion.div variants={listStaggerVariants} className="space-y-4">
                     {visibleActions.map((action) => {
                       const isExpanded = expandedActionId === action.id;
@@ -636,7 +636,7 @@ const CardInsight: React.FC = () => {
                               <div>
                                 <span className="text-base font-semibold text-white">{action.type}</span>
                                 <p className="text-xs text-gray-400 mt-0.5 flex items-center gap-1.5"><Clock size={12} /> Suggested: {action.date}</p>
-                              </div>
+                                </div>
                             </div>
                             <div className="flex items-center gap-3">
                                {action.status && (<div className={`text-xs hidden sm:block px-2.5 py-1 ${urgencyStyles.statusBg} ${urgencyStyles.statusText} ${urgencyStyles.statusBorder} rounded-full border whitespace-nowrap`}>{action.status} ({action.urgency})</div>)}
@@ -674,7 +674,7 @@ const CardInsight: React.FC = () => {
                                          </div>
                                        );
                                      })}
-                                   </div>
+                                    </div>
                                  )}
                                  <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-700/60"><div className="flex gap-2"><motion.button onClick={() => handleManageAction(action.id, 'snoozed')} className="text-xs text-gray-400 hover:text-yellow-400 flex items-center gap-1 p-1 rounded hover:bg-gray-700/50 transition-colors" title="Snooze this action" whileTap={{ scale: 0.9 }}><BellOff size={14} /> Snooze</motion.button><motion.button onClick={() => handleManageAction(action.id, 'dismissed')} className="text-xs text-gray-400 hover:text-red-400 flex items-center gap-1 p-1 rounded hover:bg-gray-700/50 transition-colors" title="Dismiss this action" whileTap={{ scale: 0.9 }}><Archive size={14} /> Dismiss</motion.button></div><motion.button className={`px-4 py-1.5 text-sm ${action.primary ? 'bg-blue-500 text-white hover:bg-blue-400' : 'bg-gray-600 text-gray-300 hover:bg-gray-500'} font-semibold rounded-full transition-colors duration-300 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white`} variants={hoverScale} whileHover="hover" whileTap="tap">{action.primary ? 'Schedule Action' : 'Mark as Reviewed'}</motion.button></div>
                               </motion.div>
@@ -703,7 +703,7 @@ const CardInsight: React.FC = () => {
                          <div className="flex-1 pt-0.5">
                            <span className={`text-xs font-semibold tracking-wide text-${insight.color}-400 uppercase`}>{insight.type}</span>
                            <p className="text-gray-100 text-sm leading-relaxed mt-1">{insight.text}</p>
-                         </div>
+                                    </div>
                        </motion.div>
                      ))}
                    </motion.div>
@@ -717,7 +717,7 @@ const CardInsight: React.FC = () => {
                      <motion.button className="text-xs text-gray-400 hover:text-emerald-400 flex items-center gap-1" whileTap={{ scale: 0.95 }}>
                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg> Filter
                      </motion.button>
-                   </div>
+                                </div>
                    <motion.div variants={listStaggerVariants} className="space-y-3">
                      {memoryItems.map((memory) => (
                        <motion.div key={memory.id} className={`flex items-start gap-3 group p-3.5 rounded-lg transition-all duration-300 border ${memory.isNew ? 'bg-emerald-800/40 border-emerald-600/60 ring-1 ring-emerald-500/50 shadow-lg' : 'bg-gray-800/40 border-gray-700/50 hover:bg-gray-700/40 hover:border-gray-600/70'}`} variants={itemVariants} initial={memory.isNew ? { scale: 0.9, opacity: 0 } : false} animate={memory.isNew ? { scale: 1, opacity: 1, transition: { delay: 0.5, duration: 0.4 } } : {}} whileHover={{ y: -2 }}>
@@ -727,7 +727,7 @@ const CardInsight: React.FC = () => {
                          <div className="flex-1">
                            <p className={`text-sm leading-relaxed ${memory.isNew ? 'text-emerald-100 font-medium' : 'text-gray-200 group-hover:text-white'} transition-colors duration-300`}>{memory.text}</p>
                            <span className={`text-xs ${memory.isNew ? 'text-emerald-300' : 'text-gray-500'} mt-1.5 block`}>{memory.timestamp}</span>
-                         </div>
+                                </div>
                        </motion.div>
                      ))}
                    </motion.div>
@@ -739,7 +739,7 @@ const CardInsight: React.FC = () => {
                          <div className="flex justify-between items-center mb-3">
                            <h4 className="text-sm font-medium text-white">Capturing Voice Memory...</h4>
                            {!isRecording && <motion.button onClick={() => setShowVoiceRecorder(false)} className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-700" whileTap={{ scale: 0.9 }}><X size={16} /></motion.button>}
-                         </div>
+                            </div>
                          <div className="flex items-center justify-center py-3 min-h-[80px]">
                            {isRecording ? (
                              <motion.div className="flex flex-col items-center" key="recording">
@@ -752,7 +752,7 @@ const CardInsight: React.FC = () => {
                                <div className="w-full bg-gray-700 h-1.5 rounded-full"><motion.div className="bg-emerald-500 h-full" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 0.8, ease: "linear", delay: 0.3 }} /></div>
                              </motion.div>
                            )}
-                         </div>
+                        </div>
                        </motion.div>
                      ) : (
                        <motion.div key="input" className="relative" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
@@ -761,7 +761,7 @@ const CardInsight: React.FC = () => {
                          <div className="absolute inset-y-0 right-0 flex items-center pr-3 gap-2">
                            <motion.button onClick={handleStartRecording} className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-700/70 hover:bg-emerald-600 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Start voice recording" variants={hoverScale} whileHover="hover" whileTap="tap"><Mic size={18} className="text-gray-300 group-hover:text-white transition-colors duration-300" /></motion.button>
                            <motion.button className="w-10 h-10 flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Add text memory" variants={hoverScale} whileHover="hover" whileTap="tap"><Send size={18} className="text-white" /></motion.button>
-                         </div>
+                            </div>
                        </motion.div>
                      )}
                    </AnimatePresence>
@@ -780,7 +780,7 @@ const CardInsight: React.FC = () => {
                     <motion.button className="text-xs text-emerald-400 flex items-center gap-1 bg-gray-800 hover:bg-gray-700 transition-colors duration-300 px-3 py-1.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" variants={hoverScale} whileHover="hover" whileTap="tap">
                       <Edit size={12} /> Edit Context
                     </motion.button>
-                  </div>
+                            </div>
                   <motion.div variants={listStaggerVariants} className="space-y-4">
                     {[ { icon: User, title: "Family & Personal", content: personalConnection.family }, { icon: Coffee, title: "Interests & Passions", content: personalConnection.interests }, { icon: MessageSquare, title: "Communication Style", content: personalConnection.commStyle } ].map((card, index) => (
                       <motion.div key={index} className="bg-gray-800/40 p-4 rounded-lg border border-gray-700/60" variants={itemVariants} whileHover={{ y: -2 }}>
@@ -812,24 +812,24 @@ const CardInsight: React.FC = () => {
 
           </motion.div>
         </AnimatePresence>
-      </div>
+                            </div>
 
       {/* Bottom Action Bar */}
       <div className="mt-auto p-4 bg-gradient-to-t from-gray-900 to-gray-850 border-t border-gray-700/50 flex flex-wrap justify-between items-center gap-3">
         <div className="flex gap-2 flex-wrap">
            <div className="flex items-center gap-1.5 text-xs bg-pink-500/10 text-pink-300 px-3 py-1.5 rounded-full border border-pink-500/30 shadow-sm backdrop-blur-sm"> 
              <Heart size={14} fill="currentColor" /> <span>Strong Connection</span> 
-           </div>
+                            </div>
           <motion.button className="flex items-center gap-1.5 text-xs bg-gray-700/50 text-gray-300 px-3 py-1.5 rounded-full hover:bg-gray-600/70 hover:text-gray-100 transition-colors duration-300 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 backdrop-blur-sm" variants={hoverScale} whileHover="hover" whileTap="tap"> 
             <Clock3 size={14} /> <span>Remind</span> <ChevronRight size={14} className="-mr-1" /> 
           </motion.button>
-        </div>
+                            </div>
         <div>
           <motion.button className="px-6 py-2.5 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-semibold text-sm rounded-lg hover:from-emerald-500 hover:to-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-400/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-emerald-400 flex items-center gap-2" variants={hoverScale} whileHover="hover" whileTap="tap"> 
             {activeTab === 'action' ? <><Check size={16}/> Review Actions</> : <><Send size={16}/> Save Changes</>} 
           </motion.button>
-        </div>
-      </div>
+                                </div>
+                            </div>
 
       {/* Scrollbar styles */}
       <style jsx global>{`

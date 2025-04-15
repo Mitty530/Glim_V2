@@ -51,6 +51,9 @@
     --violet-dark-gradient: linear-gradient(135deg, #4c1d95, #8b5cf6);
     --amber-dark-gradient: linear-gradient(135deg, #78350f, #f59e0b);
     --pink-dark-gradient: linear-gradient(135deg, #831843, #ec4899);
+    
+    /* Defining deep green background color */
+    --glim-deep-green: #1a5741;
   }
  
   .dark {
@@ -172,6 +175,13 @@ input, textarea, select {
   body, a, button, [role="button"], input, textarea, select, .cursor-pointer {
     cursor: auto;
   }
+}
+
+/* Deep green background with grid pattern */
+.bg-deep-green-grid {
+  background-color: var(--glim-deep-green);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 /* Font imports */

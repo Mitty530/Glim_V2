@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn("scroll-smooth", montserrat.variable)}>
-      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
+      <body className={cn("min-h-screen bg-deep-green-grid font-sans antialiased", inter.className)}>
         <ThemeProvider>
           <AnimationProvider>
             {children}
