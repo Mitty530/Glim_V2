@@ -5,11 +5,31 @@ import { motion } from 'framer-motion'
 
 const AiDemoSection = () => {
   return (
-    <section className="py-20 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section className="py-20 overflow-hidden relative">
+      {/* Green gradient background */}
+      <div 
+        className="absolute inset-0 z-0" 
+        style={{
+          background: 'linear-gradient(135deg, #064e3b, #10b981)',
+          opacity: 0.9
+        }}
+      ></div>
+      
+      {/* White overlay for improved contrast */}
+      <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px] z-0"></div>
+      
+      {/* Subtle pattern overlay for visual interest */}
+      <div className="absolute inset-0 opacity-5 z-0 pointer-events-none" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2310b981' fill-opacity='0.25'/%3E%3C/svg%3E")`,
+          backgroundSize: '80px 80px'
+        }}
+      ></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">AI-Powered Relationship Intelligence</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">AI-Powered Relationship Intelligence</h2>
+          <p className="text-xl text-gray-800 max-w-3xl mx-auto font-medium">
             See how Glim transforms your relationship management with advanced AI technology
           </p>
         </div>
@@ -18,7 +38,7 @@ const AiDemoSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {/* AI Feature 1 */}
           <motion.div 
-            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -29,14 +49,14 @@ const AiDemoSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold mb-2">Real-time Insights</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-700">
               Get instant analysis of relationships, interests, and opportunities as they develop
             </p>
           </motion.div>
           
           {/* AI Feature 2 */}
           <motion.div 
-            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -47,14 +67,14 @@ const AiDemoSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold mb-2">Personalized Outreach</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-700">
               AI suggests conversation starters and follow-ups based on relationship context
             </p>
           </motion.div>
           
           {/* AI Feature 3 */}
           <motion.div 
-            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -65,14 +85,14 @@ const AiDemoSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold mb-2">Intent Recognition</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-700">
               Automatically identify high-intent signals from your contacts' digital behavior
             </p>
           </motion.div>
           
           {/* AI Feature 4 */}
           <motion.div 
-            className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-100"
+            className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-green-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -83,22 +103,10 @@ const AiDemoSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold mb-2">Relationship Analytics</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-700">
               Track engagement patterns and relationship strength with visual analytics
             </p>
           </motion.div>
-        </div>
-        
-        {/* AI Demo CTA */}
-        <div className="mt-12 text-center">
-          <motion.button
-            className="bg-[#16543a] text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-[#0d3826] transition-colors duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Schedule a Demo
-          </motion.button>
-          <p className="text-gray-600 mt-4">See how our AI can transform your relationship management</p>
         </div>
       </div>
     </section>

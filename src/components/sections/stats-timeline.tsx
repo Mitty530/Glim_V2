@@ -70,17 +70,25 @@ export function StatsTimeline() {
 
   return (
     <div className="py-24 overflow-hidden relative">
-      {/* Pink/purple gradient background */}
+      {/* Green gradient background matching the hero section */}
       <div 
         className="absolute inset-0 z-0" 
         style={{
-          background: 'linear-gradient(135deg, #f9a8d4 0%, #d8b4fe 50%, #f9a8d4 100%)',
-          opacity: 0.8
+          background: 'linear-gradient(135deg, #064e3b, #10b981)',
+          opacity: 0.9
         }}
       ></div>
       
-      {/* Semi-transparent white overlay for improved contrast */}
-      <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-0"></div>
+      {/* White overlay for improved contrast */}
+      <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-0"></div>
+      
+      {/* Subtle pattern overlay for visual interest */}
+      <div className="absolute inset-0 opacity-5 z-0 pointer-events-none" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2310b981' fill-opacity='0.25'/%3E%3C/svg%3E")`,
+          backgroundSize: '80px 80px'
+        }}
+      ></div>
       
       <motion.div 
         className="container mx-auto px-4 max-w-7xl relative z-10"
@@ -89,20 +97,20 @@ export function StatsTimeline() {
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
       >
-        {/* Section title */}
+        {/* Section title with enhanced contrast */}
         <motion.div variants={itemVariants} className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Why Your Brain Isn't a CRM
           </h2>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-800 max-w-2xl mx-auto">
             Relationship memory is unstructured, emotional, and context-rich. Glim transforms how you maintain connections.
           </p>
         </motion.div>
         
         {/* Main timeline container */}
         <div className="relative">
-          {/* Horizontal timeline bar */}
-          <div className="hidden md:block absolute top-[32px] left-[8%] right-[8%] h-[2px] bg-gray-300 z-0"></div>
+          {/* Horizontal timeline bar - Darker for better visibility */}
+          <div className="hidden md:block absolute top-[32px] left-[8%] right-[8%] h-[2px] bg-gray-400 z-0"></div>
           
           {/* Stats timeline (desktop) */}
           <div className="hidden md:grid grid-cols-4 relative z-10 px-[5%]">
@@ -120,30 +128,30 @@ export function StatsTimeline() {
                     </div>
                   </div>
                   
-                  {/* Purple glow effect */}
+                  {/* Purple glow effect - strengthened */}
                   <div className="absolute -inset-[6px] rounded-full" style={{
-                    background: 'radial-gradient(circle, rgba(216, 180, 254, 0.8) 0%, rgba(216, 180, 254, 0) 70%)',
+                    background: 'radial-gradient(circle, rgba(216, 180, 254, 0.9) 0%, rgba(216, 180, 254, 0) 70%)',
                     filter: 'blur(4px)',
                   }}></div>
                   
-                  {/* Small dot on timeline */}
-                  <div className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-gray-400"></div>
+                  {/* Small dot on timeline - darkened */}
+                  <div className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-gray-500"></div>
                 </div>
                 
-                {/* Stat Value */}
-                <h3 className="text-4xl md:text-5xl font-bold mb-3 text-gray-900">
+                {/* Stat Value - Darker for better contrast */}
+                <h3 className="text-4xl md:text-5xl font-bold mb-3 text-gray-900 drop-shadow-sm">
                   {stat.value}
                 </h3>
                 
-                {/* Description */}
-                <p className="text-gray-700 text-center max-w-[250px] mx-auto leading-snug">
+                {/* Description - Darker for better contrast */}
+                <p className="text-gray-800 font-medium text-center max-w-[250px] mx-auto leading-snug">
                   {stat.description}
                 </p>
               </motion.div>
             ))}
           </div>
           
-          {/* Mobile view */}
+          {/* Mobile view - with improved text contrast */}
           <div className="md:hidden space-y-12">
             {statsData.map((stat, index) => (
               <motion.div
@@ -159,21 +167,21 @@ export function StatsTimeline() {
                     </div>
                   </div>
                   
-                  {/* Purple glow effect */}
+                  {/* Purple glow effect - strengthened */}
                   <div className="absolute -inset-[6px] rounded-full" style={{
-                    background: 'radial-gradient(circle, rgba(216, 180, 254, 0.8) 0%, rgba(216, 180, 254, 0) 70%)',
+                    background: 'radial-gradient(circle, rgba(216, 180, 254, 0.9) 0%, rgba(216, 180, 254, 0) 70%)',
                     filter: 'blur(4px)',
                   }}></div>
                 </div>
                 
                 <div>
-                  {/* Stat Value */}
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900">
+                  {/* Stat Value - Darker for better contrast */}
+                  <h3 className="text-3xl font-bold mb-2 text-gray-900 drop-shadow-sm">
                     {stat.value}
                   </h3>
                   
-                  {/* Description */}
-                  <p className="text-gray-700 leading-snug">
+                  {/* Description - Darker for better contrast */}
+                  <p className="text-gray-800 font-medium leading-snug">
                     {stat.description}
                   </p>
                 </div>
@@ -181,26 +189,6 @@ export function StatsTimeline() {
             ))}
           </div>
         </div>
-        
-        {/* Call to action */}
-        <motion.div 
-          className="text-center mt-20"
-          variants={itemVariants}
-        >
-          <a
-            href="#waitlist"
-            className="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-xl shadow-xl text-white bg-purple-700 hover:bg-purple-800 transition duration-300 hover:scale-105 transform"
-            onClick={(e) => {
-              e.preventDefault();
-              const waitlistSection = document.getElementById('waitlist');
-              if (waitlistSection) {
-                waitlistSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            Join the Waitlist
-          </a>
-        </motion.div>
       </motion.div>
     </div>
   )

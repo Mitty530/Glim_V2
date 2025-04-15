@@ -9,7 +9,6 @@ const navLinks = [
   { href: '#', label: 'Home' },
   { href: '#value', label: 'Why Glim' },
   { href: '#how-it-works', label: 'How It Works' },
-  { href: '#demo', label: 'Demo' },
 ]
 
 export function Navbar() {
@@ -77,8 +76,8 @@ export function Navbar() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' 
-          : 'bg-transparent py-5'
+          ? 'bg-white/90 backdrop-blur-md shadow-md py-3' 
+          : 'bg-black/20 backdrop-blur-sm py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,10 +94,10 @@ export function Navbar() {
               });
             }}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-700 flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-sm">GL</span>
             </div>
-            <span className="font-bold text-xl text-gray-900">Glim</span>
+            <span className={`font-bold text-xl ${isScrolled ? 'text-gray-900' : 'text-white drop-shadow-sm'}`}>Glim</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -107,10 +106,10 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-brand-primary ${
+                className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
                   pathname === link.href 
-                    ? 'text-brand-primary' 
-                    : 'text-gray-700'
+                    ? 'text-emerald-400' 
+                    : isScrolled ? 'text-gray-700' : 'text-white font-semibold drop-shadow-sm'
                 }`}
                 onClick={(e) => handleNavClick(e, link.href)}
               >
@@ -120,9 +119,9 @@ export function Navbar() {
             
             {/* CTA Button */}
             <Link
-              href="#waitlist"
-              className="px-4 py-2 rounded-lg bg-brand-primary text-white text-sm font-medium hover:bg-brand-primary/90 transition-colors"
-              onClick={(e) => handleNavClick(e, '#waitlist')}
+              href="#contact-section"
+              className="px-5 py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-md border border-emerald-500/50"
+              onClick={(e) => handleNavClick(e, '#contact-section')}
             >
               Join Waitlist
             </Link>
@@ -131,7 +130,9 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             id="menu-button"
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            className={`md:hidden flex items-center justify-center w-10 h-10 rounded-lg ${
+              isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+            } transition-colors`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -167,7 +168,7 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             id="mobile-menu"
-            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg"
+            className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -178,9 +179,9 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`block py-2 text-base font-medium transition-colors hover:text-brand-primary ${
+                  className={`block py-2 text-base font-medium transition-colors hover:text-emerald-600 ${
                     pathname === link.href 
-                      ? 'text-brand-primary' 
+                      ? 'text-emerald-600' 
                       : 'text-gray-700'
                   }`}
                   onClick={(e) => handleNavClick(e, link.href)}
@@ -191,9 +192,9 @@ export function Navbar() {
               
               {/* Mobile CTA Button */}
               <Link
-                href="#waitlist"
-                className="block w-full mt-4 px-4 py-3 rounded-lg bg-brand-primary text-center text-white font-medium hover:bg-brand-primary/90 transition-colors"
-                onClick={(e) => handleNavClick(e, '#waitlist')}
+                href="#contact-section"
+                className="block w-full mt-4 px-4 py-3 rounded-lg bg-emerald-600 text-center text-white font-medium hover:bg-emerald-700 transition-colors shadow-md"
+                onClick={(e) => handleNavClick(e, '#contact-section')}
               >
                 Join Waitlist
               </Link>

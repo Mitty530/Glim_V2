@@ -84,7 +84,7 @@ export default function WaitlistForm() {
     <div className="w-full max-w-md mx-auto">
       <div className="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700/50">
         <h3 className="text-xl font-bold mb-4 text-white">
-          Join the Waitlist
+          Secure Your Early Access
         </h3>
         
         {submitStatus.success ? (
@@ -114,7 +114,7 @@ export default function WaitlistForm() {
             </h4>
             
             <p className="text-gray-400 text-sm">
-              Check your inbox for a confirmation email with more details.
+              You're on the path to never forgetting what makes relationships valuable. Check your inbox for details.
             </p>
             
             <div className="mt-3 text-gray-400 text-xs">
@@ -126,7 +126,7 @@ export default function WaitlistForm() {
             <div className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                  Name
+                  Your Name
                 </label>
                 <input
                   type="text"
@@ -134,7 +134,7 @@ export default function WaitlistForm() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-900/60 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white"
-                  placeholder="Your name"
+                  placeholder="Enter your name"
                   required
                 />
               </div>
@@ -156,14 +156,14 @@ export default function WaitlistForm() {
               
               <div>
                 <label htmlFor="features" className="block text-sm font-medium text-gray-300 mb-1">
-                  What features would you like to see?
+                  What relationship pain points do you want Glim to solve?
                 </label>
                 <textarea
                   id="features"
                   value={features}
                   onChange={(e) => setFeatures(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-900/60 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white resize-none min-h-[100px]"
-                  placeholder="Tell us what features you're most excited to see..."
+                  placeholder="Tell us what frustrates you about remembering context in relationships..."
                 />
               </div>
               
@@ -189,13 +189,12 @@ export default function WaitlistForm() {
                     Processing...
                   </>
                 ) : (
-                  'Join the Waitlist'
+                  'Lock In Your Access'
                 )}
               </motion.button>
               
               <p className="text-gray-500 text-xs text-center mt-4">
-                We&apos;ll send you occasional updates about Glim. 
-                No spam, and you can unsubscribe at any time.
+                Your network is fading while you wait. The sooner you join, the sooner your relationship memory becomes your competitive advantage.
               </p>
             </div>
           </form>

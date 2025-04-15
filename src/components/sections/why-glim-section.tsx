@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'fra
 import { ParallaxEffect } from '@/components/ui/parallax-effect'
 import Image from 'next/image'
 
-// Animation variants
+// Enhanced animation variants
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -27,12 +27,80 @@ const staggerItems = {
   }
 };
 
-const itemVariants = {
-  initial: { opacity: 0, y: 15 },
-  animate: { 
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
     opacity: 1, 
     y: 0,
+    transition: { 
+      duration: 0.5, 
+      ease: "easeOut"
+    }
+  },
+  hover: {
+    y: -8,
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
+
+const itemVariants = {
+  initial: { opacity: 0, x: -10 },
+  animate: { 
+    opacity: 1, 
+    x: 0,
     transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+const rightItemVariants = {
+  initial: { opacity: 0, x: 10 },
+  animate: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+// VS toggle animation
+const vsVariants = {
+  initial: { scale: 0, rotate: -180 },
+  animate: { 
+    scale: 1, 
+    rotate: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.34, 1.56, 0.64, 1], // Spring-like effect
+      delay: 0.3
+    }
+  }
+};
+
+// Line animation
+const lineVariants = {
+  initial: { scaleX: 0, opacity: 0 },
+  animate: { 
+    scaleX: 1, 
+    opacity: 1,
+    transition: { 
+      duration: 0.4, 
+      ease: "easeOut",
+      delay: 0.6
+    }
+  }
+};
+
+// Dot animation
+const dotVariants = {
+  initial: { scale: 0, opacity: 0 },
+  animate: { 
+    scale: 1, 
+    opacity: 1,
+    transition: { 
+      duration: 0.3, 
+      ease: "easeOut",
+      delay: 0.7
+    }
   }
 };
 
@@ -90,6 +158,32 @@ const CheckIcon = ({ className = "" }) => (
   </svg>
 );
 
+// Enhanced text animation variants
+const textReveal = {
+  initial: { y: 100, opacity: 0 },
+  animate: { 
+    y: 0, 
+    opacity: 1,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.33, 1, 0.68, 1] // Custom spring-like easing
+    }
+  }
+};
+
+const splitTextReveal = {
+  initial: { opacity: 0, y: 50 },
+  animate: (i: number) => ({ 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.5, 
+      delay: i * 0.08,
+      ease: "easeOut"
+    }
+  })
+};
+
 export function WhyGlimSection() {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.2 });
@@ -112,153 +206,397 @@ export function WhyGlimSection() {
   const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   
+  // For split text animation
+  const words = ["Feel", "The", "Freedom", "of", "Better", "Relationships"];
+  
   return (
     <section 
       id="why-glim"
       ref={containerRef} 
-      className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-gray-50 to-white"
+      className="relative py-20 md:py-28 overflow-hidden"
     >
-      {/* Background decoration with static styles */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-primary/5 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-[35rem] h-[35rem] bg-brand-secondary/5 rounded-full blur-[150px]"></div>
+      {/* Enhanced background decoration */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-[#064e3b] to-[#10b981] opacity-90 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.9 }}
+        transition={{ duration: 1.2 }}
+      />
+
+      {/* Animated glow elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-emerald-500 rounded-full blur-[120px] opacity-25"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.25, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 left-1/4 w-[35rem] h-[35rem] bg-emerald-400 rounded-full blur-[150px] opacity-25"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.25, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-teal-400 rounded-full blur-[120px] opacity-15"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 0.15, scale: 1 }}
+          transition={{ duration: 2, delay: 0.6, ease: "easeOut" }}
+        />
       </div>
 
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-10 z-0 pointer-events-none" 
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2395D5B2' fill-opacity='0.15'/%3E%3C/svg%3E")`,
-          backgroundSize: '120px 120px'
-        }}
-      ></div>
+      {/* Leaf pattern overlay with animation */}
+      <motion.div 
+        className="absolute inset-0 leaf-pattern opacity-0 z-0 pointer-events-none" 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ duration: 1.2 }}
+      />
 
       {/* Content container */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-              <span className="inline-block">
-                Feel The <span className="text-[#22c55e]">Freedom</span> of Better Relationships
+          {/* Animated section header with enhanced animations */}
+          <motion.div 
+            className="text-center mb-16"
+            initial="initial"
+            animate={isInView ? "animate" : "initial"}
+            variants={fadeInUp}
+          >
+            {/* Header badge with animation */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center bg-emerald-800/40 backdrop-blur-sm py-1.5 px-4 rounded-full mb-6 shadow-lg border border-emerald-500/30"
+            >
+              <span className="text-sm font-medium text-emerald-300 flex items-center">
+                <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Why Choose Glim
               </span>
-            </h2>
+            </motion.div>
+            
+            {/* Split text animation for main heading */}
+            <div className="mb-8 overflow-hidden">
+              <motion.div 
+                className="flex flex-wrap justify-center gap-x-3 md:gap-x-4 px-6 py-4 bg-black/20 backdrop-blur-sm rounded-xl mx-auto max-w-3xl border border-white/10 shadow-lg"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+              >
+                {words.map((word, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i}
+                    variants={splitTextReveal}
+                    initial="initial"
+                    animate={isInView ? "animate" : "initial"}
+                    className={`text-4xl md:text-5xl font-bold ${
+                      word === "Freedom" 
+                        ? "text-[#4ade80] relative inline-block"
+                        : "text-white drop-shadow-sm"
+                    }`}
+                  >
+                    {word}
+                    {word === "Freedom" && (
+                      <motion.span 
+                        className="absolute bottom-0 left-0 w-full h-1.5 bg-[#4ade80]/60 rounded-full"
+                        initial={{ scaleX: 0, originX: 0 }}
+                        animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                        transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+                      />
+                    )}
+                  </motion.span>
+                ))}
+              </motion.div>
+            </div>
 
-            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-medium">
-              The best closers don't have better memory.
-              <span className="text-[#22c55e]"> They have better systems.</span>
-            </p>
-          </div>
+            {/* Enhanced animation for subtitle */}
+            <div className="overflow-hidden">
+              <motion.div
+                className="bg-black/20 backdrop-blur-sm px-6 py-3 rounded-lg mx-auto max-w-2xl border border-white/10 shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <motion.p 
+                  className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto font-medium"
+                  variants={textReveal}
+                >
+                  <motion.span 
+                    className="inline-block"
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ delay: 0.8, duration: 0.5 }}
+                  >
+                    The best closers don't have better memory.
+                  </motion.span>{" "}
+                  <motion.span 
+                    className="inline-block text-[#4ade80] font-semibold"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ delay: 1.3, duration: 0.5 }}
+                  >
+                    They have better systems.
+                  </motion.span>
+                </motion.p>
+              </motion.div>
+            </div>
+          </motion.div>
 
-          {/* Comparison cards */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 max-w-6xl mx-auto">
-            {/* WITHOUT US card */}
-            <div className="flex-1 bg-[#f5f5f5] rounded-3xl overflow-hidden border border-gray-200 shadow-xl relative">
-              {/* Card header */}
-              <div className="bg-[#e9e9e9] p-5 flex justify-center relative overflow-hidden">
-                <h3 className="text-2xl font-bold text-[#2d3748] relative z-10">
+          {/* Comparison cards with better position for VS overlay */}
+          <div className="flex flex-col md:flex-row gap-6 md:gap-16 max-w-6xl mx-auto relative">
+            {/* WITHOUT US card with enhanced contrast */}
+            <motion.div 
+              className="flex-1 bg-black/30 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/20 shadow-xl relative"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              whileHover="hover"
+              variants={cardVariants}
+              onMouseEnter={() => setHoveredCard('left')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Card header with subtle animation */}
+              <motion.div 
+                className="bg-black/50 p-5 flex justify-center relative overflow-hidden"
+                whileHover={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.h3 
+                  className="text-2xl font-bold text-white relative z-10"
+                  initial={{ opacity: 0.9 }}
+                  whileHover={{ scale: 1.05, opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
                   WITHOUT US
-                </h3>
-              </div>
+                </motion.h3>
+              </motion.div>
 
-              {/* List items */}
+              {/* Animated list items with enhanced visibility */}
               <div className="p-6 md:p-8 relative">
-                <ul className="space-y-5">
+                <motion.ul 
+                  className="space-y-5"
+                  initial="initial"
+                  animate={isInView ? "animate" : "initial"}
+                  variants={staggerItems}
+                >
                   {traditionalApproaches.map((item, index) => (
-                    <li 
+                    <motion.li 
                       key={index}
                       className="flex items-start gap-3"
+                      variants={itemVariants}
+                      custom={index}
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
                     >
-                      <ShieldIcon className="w-6 h-6 text-gray-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 font-medium">{item}</span>
-                    </li>
+                      <ShieldIcon className="w-6 h-6 text-gray-300 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-100 font-medium drop-shadow-sm">{item}</span>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </div>
-            </div>
+            </motion.div>
 
-            {/* GLIM card */}
-            <div className="flex-1 bg-white rounded-3xl overflow-hidden border border-[#22c55e]/20 shadow-2xl relative">
-              {/* Card header */}
-              <div className="bg-[#22c55e] p-5 flex justify-center items-center gap-3 relative overflow-hidden">
-                {/* Logo */}
-                <div className="relative z-10">
-                  {/* <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="white" strokeWidth="2" fill="#4ade80" />
-                  </svg> */}
+            {/* VS Toggle and connecting lines between cards - Enhanced for better visibility */}
+            <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-24">
+              <div className="relative flex items-center justify-center">
+                {/* Left connection line with circle */}
+                <div className="absolute left-0 right-1/2 flex items-center justify-start mr-5">
+                  <motion.div 
+                    className="w-full h-[2px] bg-gray-200"
+                    variants={lineVariants}
+                    initial="initial"
+                    animate={isInView ? "animate" : "initial"}
+                  />
+                  <motion.div 
+                    className="absolute right-0 w-2 h-2 bg-gray-200 rounded-full"
+                    variants={dotVariants}
+                    initial="initial"
+                    animate={isInView ? "animate" : "initial"}
+                  />
                 </div>
-
-                <h3 className="text-2xl font-bold text-white relative z-10">
-                  Glim AI
-                </h3>
+                
+                {/* VS Toggle with enhanced animated appearance */}
+                <motion.div 
+                  className="flex-shrink-0 z-10"
+                  variants={vsVariants}
+                  initial="initial"
+                  animate={isInView ? "animate" : "initial"}
+                >
+                  <motion.div 
+                    className="w-14 h-14 bg-black rounded-full flex items-center justify-center shadow-lg border-2 border-emerald-500/40"
+                    whileHover={{ 
+                      scale: 1.1,
+                      boxShadow: "0 0 25px rgba(16, 185, 129, 0.6)",
+                      borderColor: "rgba(16, 185, 129, 0.7)"
+                    }}
+                  >
+                    <span className="text-white text-lg font-bold">
+                      VS
+                    </span>
+                  </motion.div>
+                </motion.div>
+                
+                {/* Right connection line with circle */}
+                <div className="absolute left-1/2 right-0 flex items-center justify-end ml-5">
+                  <motion.div 
+                    className="absolute left-0 w-2 h-2 bg-[#4ade80] rounded-full shadow-sm shadow-[#4ade80]/50"
+                    variants={dotVariants}
+                    initial="initial"
+                    animate={isInView ? "animate" : "initial"}
+                  />
+                  <motion.div 
+                    className="w-full h-[2px] bg-[#4ade80] shadow-sm shadow-[#4ade80]/30"
+                    variants={lineVariants}
+                    initial="initial"
+                    animate={isInView ? "animate" : "initial"}
+                  />
+                </div>
               </div>
+            </div>
 
-              {/* List items */}
+            {/* GLIM card with enhanced visibility */}
+            <motion.div 
+              className="flex-1 bg-white/15 backdrop-blur-sm rounded-3xl overflow-hidden border border-[#4ade80]/40 shadow-2xl relative"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              whileHover="hover"
+              variants={cardVariants}
+              onMouseEnter={() => setHoveredCard('right')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Enhanced card header */}
+              <motion.div 
+                className="bg-[#10b981] p-5 flex justify-center items-center gap-3 relative overflow-hidden"
+                whileHover={{ backgroundColor: "#0d9868" }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Animated background effect */}
+                <motion.div 
+                  className="absolute inset-0 opacity-40"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 0.4 }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                  style={{
+                    background: "radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)"
+                  }}
+                />
+
+                {/* Animated logo with enhanced effects */}
+                <motion.div 
+                  className="relative z-10 w-8 h-8 rounded-full bg-white/30 flex items-center justify-center shadow-md shadow-emerald-800/20"
+                  initial={{ scale: 0.9, opacity: 0.5 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                >
+                  <span className="text-white font-bold text-sm">G</span>
+                </motion.div>
+
+                <motion.h3 
+                  className="text-2xl font-bold text-white relative z-10 drop-shadow-sm"
+                  initial={{ opacity: 0.9 }}
+                  whileHover={{ scale: 1.05, opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Glim AI
+                </motion.h3>
+              </motion.div>
+
+              {/* Animated list items with enhanced visibility */}
               <div className="p-6 md:p-8 relative">
-                <ul className="space-y-5">
+                <motion.ul 
+                  className="space-y-5"
+                  initial="initial"
+                  animate={isInView ? "animate" : "initial"}
+                  variants={staggerItems}
+                >
                   {glimAdvantages.map((item, index) => (
-                    <li 
+                    <motion.li 
                       key={index}
                       className="flex items-start gap-3"
+                      variants={rightItemVariants}
+                      custom={index}
+                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
                     >
-                      <div className="w-6 h-6 rounded-full bg-[#222222] flex items-center justify-center flex-shrink-0">
+                      <motion.div 
+                        className="w-6 h-6 rounded-full bg-[#10b981] flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/40"
+                        whileHover={{ scale: 1.1, backgroundColor: "#4ade80", boxShadow: "0 0 12px rgba(74, 222, 128, 0.6)" }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <CheckIcon className="w-3.5 h-3.5 text-white" />
-                      </div>
-                      <span className="text-gray-700 font-medium">{item}</span>
-                    </li>
+                      </motion.div>
+                      <span className="text-white font-medium drop-shadow-sm">{item}</span>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </div>
-            </div>
+
+              {/* Subtle animated glow effect on the card */}
+              <motion.div 
+                className="absolute -inset-1 bg-gradient-to-r from-[#4ade80]/0 via-[#4ade80]/30 to-[#4ade80]/0 opacity-0 rounded-3xl"
+                animate={{ 
+                  opacity: [0, 0.3, 0],
+                  x: ['-100%', '100%', '100%'],
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                  repeatDelay: 5
+                }}
+              />
+            </motion.div>
           </div>
           
-          {/* VS Toggle and connecting lines between cards */}
-          <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[40%] z-20">
-            {/* Left connection line with circle */}
-            <div className="flex items-center">
-              <div className="w-8 h-[2px] bg-gray-400"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-              <div className="w-4 h-[2px] bg-gray-400"></div>
+          {/* Enhanced vertical connection for mobile view */}
+          <motion.div 
+            className="md:hidden flex flex-col items-center relative my-4 z-10"
+            initial="initial"
+            animate={isInView ? "animate" : "initial"}
+          >
+            <div className="flex flex-col items-center">
+              <motion.div 
+                className="h-8 w-[2px] bg-gray-200"
+                variants={lineVariants}
+              />
+              <motion.div 
+                className="w-2 h-2 bg-gray-200 rounded-full"
+                variants={dotVariants}
+              />
             </div>
             
-            {/* VS Toggle */}
-            <div className="flex-shrink-0 mx-2">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white text-xs font-bold">
-                  V/S
+            <motion.div 
+              className="relative my-2"
+              variants={vsVariants}
+            >
+              <motion.div 
+                className="w-14 h-14 bg-black rounded-full flex items-center justify-center shadow-lg border-2 border-emerald-500/40"
+                whileHover={{ 
+                  scale: 1.1,
+                  boxShadow: "0 0 25px rgba(16, 185, 129, 0.6)",
+                  borderColor: "rgba(16, 185, 129, 0.7)"
+                }}
+              >
+                <span className="text-white text-lg font-bold">
+                  VS
                 </span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
-            {/* Right connection line with circle */}
-            <div className="flex items-center">
-              <div className="w-4 h-[2px] bg-[#22c55e]"></div>
-              <div className="w-2 h-2 bg-[#22c55e] rounded-full"></div>
-              <div className="w-8 h-[2px] bg-[#22c55e]"></div>
+            <div className="flex flex-col items-center">
+              <motion.div 
+                className="w-2 h-2 bg-[#4ade80] rounded-full shadow-sm shadow-[#4ade80]/50"
+                variants={dotVariants}
+              />
+              <motion.div 
+                className="h-8 w-[2px] bg-[#4ade80] shadow-sm shadow-[#4ade80]/30"
+                variants={lineVariants}
+              />
             </div>
-          </div>
-          
-          {/* Vertical connection lines for mobile */}
-          <div className="md:hidden flex flex-col items-center relative -mt-3 mb-3 z-10">
-            <div className="flex items-center">
-              <div className="h-8 w-[2px] bg-gray-400"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-              <div className="h-4 w-[2px] bg-gray-400"></div>
-            </div>
-            
-            <div className="relative my-2">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white text-xs font-bold">
-                  V/S
-                </span>
-              </div>
-            </div>
-            
-            <div className="flex items-center">
-              <div className="h-4 w-[2px] bg-[#22c55e]"></div>
-              <div className="w-2 h-2 bg-[#22c55e] rounded-full"></div>
-              <div className="h-8 w-[2px] bg-[#22c55e]"></div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

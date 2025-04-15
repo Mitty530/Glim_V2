@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { AnimationProvider } from '@/components/providers/animation-provider'
 import { Analytics } from '@vercel/analytics/react'
 import CustomCursor from '@/components/ui/custom-cursor'
+import CursorSectionDetector from '@/components/ui/cursor-section-detector'
 import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -31,6 +32,7 @@ export default function RootLayout({
             {children}
           </AnimationProvider>
           <CustomCursor />
+          <CursorSectionDetector />
         </ThemeProvider>
         <Analytics />
       </body>

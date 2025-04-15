@@ -1,29 +1,32 @@
 GLIM
 ----------
 
-THANK YOU FOR JOINING OUR WAITLIST!
+YOUR RELATIONSHIP MEMORY ENGINE IS WAITING
 
 Hi {{firstName}},
 
-Thank you for joining the Glim waitlist! We're thrilled to have you on board as we prepare to launch our revolutionary networking intelligence platform.
+Thank you for securing your spot on the Glim waitlist. You've made a crucial first step toward never losing another opportunity because of forgotten context.
 
-We'll notify you as soon as we're ready to welcome you to Glim.
+Your brain was never meant to be a CRM. Glim is.
 
-While you wait, here's what you can look forward to:
+While you wait for your access, here's what you can look forward to:
 
-* Transform casual conversations into structured contact cards
-* Never forget important details about your professional connections
-* Get timely follow-up reminders for meaningful relationships
-* Access insights about your network that would otherwise be lost
+* Turn messy voice reflections into relationship momentum
+* Capture nuance and context that traditional CRMs can't
+* Translate memory into authentic actions that close deals
+* Extend the monetization window of every relationship
+* Convert one-time meetings into recurring opportunities
 
 {{#comments}}
-YOUR FEATURE REQUESTS:
+YOUR PAIN POINTS:
 {{comments}}
 
-Thank you for your feedback! We appreciate your input on features you'd like to see in Glim.
+Thank you for sharing. This helps us ensure Glim directly addresses your relationship memory challenges.
 {{/comments}}
 
-If you have any questions in the meantime, feel free to reply to this email. We're here to help.
+Your network isn't dying. It's fading. And every day, you're missing opportunities you don't even realize exist.
+
+Glim will notify you as soon as your access is ready. The people you're forgetting will thank you.
 
 Best regards,
 The Glim Team
