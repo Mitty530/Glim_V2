@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import AiFaq from '../sections/ai-faq.tsx'
+import AiFaq from '../sections/ai-faq'
 
 
 export function Footer() {
