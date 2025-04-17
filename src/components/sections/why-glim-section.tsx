@@ -106,25 +106,25 @@ const dotVariants = {
 
 // Comparison data
 const traditionalApproaches = [
-  "Manually searching for leads",
-  "Cold outreach with low response rates",
-  "Wasting hours scrolling social media",
-  "Missing high-intent buyers",
-  "Generic, ineffective messaging",
-  "Slow response times, lost deals",
-  "High cost, low efficiency sales tools",
-  "Sales reps overloaded with manual work"
+  "Forgetting details after meetings",
+  "Feeling unsure how to follow up because you don't remember enough",
+  "Strained, shallow conversations due to lack of context",
+  "Relationships that fade after one interaction",
+  "Mental overload trying to track every name, goal, and thread",
+  "Wasting time digging through old notes, emails, and CRMs",
+  "Struggling to scale personal relationships as your network grows",
+  "Trying to be thoughtful, but missing the details that make it personal"
 ];
 
 const glimAdvantages = [
-  "AI finds high-intent leads instantly",
-  "Engage with warm prospects, not cold ones",
-  "No more endless scrolling—get real signals",
-  "Never miss a potential buyer again",
-  "AI suggests personalized replies",
-  "Respond 10x faster and close more deals",
-  "Affordable, powerful, and easy to use",
-  "Focus on selling, let us do the heavy lifting"
+  "Effortless recall of key details from every meeting",
+  "Instant context before every follow-up",
+  "Insightful conversation openers drawn from your past interactions",
+  "Guidance on what to bring up — and what to hold back",
+  "Prioritized memory: what matters most, and when to mention it",
+  "Deeper, more personal conversations that build trust",
+  "Scalable relationship-building without sacrificing authenticity",
+  "Relationship context stays fresh, even after time apart"
 ];
 
 // Shield/Badge icon
@@ -182,6 +182,18 @@ const splitTextReveal = {
       ease: "easeOut"
     }
   })
+};
+
+// Add containerVariants for staggering text
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05, 
+      delayChildren: 0.2
+    }
+  }
 };
 
 export function WhyGlimSection() {
@@ -256,96 +268,40 @@ export function WhyGlimSection() {
       {/* Content container */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Animated section header with enhanced animations */}
-          <motion.div 
-            className="text-center mb-16"
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
-            variants={fadeInUp}
-          >
-            {/* Header badge with animation */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center bg-emerald-800/40 backdrop-blur-sm py-1.5 px-4 rounded-full mb-6 shadow-lg border border-emerald-500/30"
+          {/* Enhanced Heading Area */}
+          <div className="container mx-auto px-4 relative z-10 mb-16 md:mb-24 text-center">
+            <motion.div 
+              className="inline-flex items-center bg-white/90 backdrop-blur-sm py-1.5 px-4 rounded-full mb-6 shadow-md"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <span className="text-sm font-medium text-emerald-300 flex items-center">
-                <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                Why Choose Glim
-              </span>
+              <CheckIcon className="w-4 h-4 mr-2 text-emerald-600" />
+              <span className="text-sm font-semibold text-gray-800">Why Choose Glim</span>
             </motion.div>
             
-            {/* Split text animation for main heading */}
-            <div className="mb-8 overflow-hidden">
-              <motion.div 
-                className="flex flex-wrap justify-center gap-x-3 md:gap-x-4 px-6 py-4 bg-black/20 backdrop-blur-sm rounded-xl mx-auto max-w-3xl border border-white/10 shadow-lg"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-              >
-                {words.map((word, i) => (
-                  <motion.span
-                    key={i}
-                    custom={i}
-                    variants={splitTextReveal}
-                    initial="initial"
-                    animate={isInView ? "animate" : "initial"}
-                    className={`text-4xl md:text-5xl font-bold ${
-                      word === "Freedom" 
-                        ? "text-[#4ade80] relative inline-block"
-                        : "text-white drop-shadow-sm"
-                    }`}
-                  >
-                    {word}
-                    {word === "Freedom" && (
-                      <motion.span 
-                        className="absolute bottom-0 left-0 w-full h-1.5 bg-[#4ade80]/60 rounded-full"
-                        initial={{ scaleX: 0, originX: 0 }}
-                        animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                        transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
-                      />
-                    )}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Enhanced animation for subtitle */}
-            <div className="overflow-hidden">
-              <motion.div
-                className="bg-black/20 backdrop-blur-sm px-6 py-3 rounded-lg mx-auto max-w-2xl border border-white/10 shadow-md"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <motion.p 
-                  className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto font-medium"
-                  variants={textReveal}
-                >
-                  <motion.span 
-                    className="inline-block"
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                  >
-                    The best closers don't have better memory.
-                  </motion.span>{" "}
-                  <motion.span 
-                    className="inline-block text-[#4ade80] font-semibold"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ delay: 1.3, duration: 0.5 }}
-                  >
-                    They have better systems.
-                  </motion.span>
-                </motion.p>
-              </motion.div>
-            </div>
-          </motion.div>
+            {/* Animated Headline */}
+            <motion.h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg overflow-hidden"
+              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}
+              variants={textReveal}
+              initial="initial"
+              animate={isInView ? "animate" : "initial"}
+            >
+              Deeper Trust. Stronger Follow-Ups. Better Relationships
+            </motion.h2>
+            
+            {/* Split Text Subheadline */}
+            <motion.p 
+              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto drop-shadow-md leading-relaxed"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={containerVariants}
+            >
+              <span className="block">The cost of forgetting isn't small. It's every opportunity that never called back.</span>
+              <span className="block mt-2">Never underestimate the power of small contextual details in relationships.</span>
+            </motion.p>
+          </div>
 
           {/* Comparison cards with better position for VS overlay */}
           <div className="flex flex-col md:flex-row gap-6 md:gap-16 max-w-6xl mx-auto relative">

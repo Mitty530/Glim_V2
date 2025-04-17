@@ -157,7 +157,7 @@ export function HeroSection() {
               className="mb-2"
             >
               <span className="text-emerald-300 font-semibold text-lg md:text-xl tracking-wide drop-shadow-md">
-                The human brain was never meant to be a CRM
+                Missed details are costing you relationships and missed opportunities
               </span>
             </motion.div>
             

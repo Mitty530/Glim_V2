@@ -13,15 +13,15 @@ const AiFaq = () => {
   const faqItems = [
     {
       question: "What is an AI Relationship Memory Engine?",
-      answer: "Unlike traditional CRMs that just store data, Glim captures the emotional context and nuance of your relationships. It remembers what makes each connection unique, helping you follow up authentically and turn conversations into lasting business relationships."
+      answer: "Glim captures the emotional context and nuance of your relationships. It remembers what makes each connection unique, helping you follow up authentically and turn conversations into lasting business relationships."
     },
     {
       question: "How does Glim improve my follow-ups?",
-      answer: "Glim turns voice notes into smart relationship summaries. After a meeting, just speak into Glim, and it captures key points, context, and follow-up items. When it's time to reconnect, Glim provides personalized, context-rich follow-ups that see 3-5x higher conversion rates."
+      answer: "The biggest follow-up mistakes aren't about forgetting to do it. They're about doing it without context. That's when messages feel cold, generic, or out of sync.\nGlim captures the key things people say and care about right after your conversations. When it's time to reconnect, it gives you a personalized, memory-rich summary so every follow-up feels thoughtful, timely, and relevant."
     },
     {
       question: "How is Glim different from a standard CRM?",
-      answer: "Traditional CRMs were designed for pipeline tracking, not relationship building. They're rigid, require manual data entry, and miss emotional nuance. Glim focuses on capturing relationship context, automating memory, and turning conversations into genuine connections that close deals."
+      answer: "Most tools are built for tracking pipelines or managing workflows. They rely on rigid forms, dashboards, and endless manual input — which makes them feel like work.\n\nGlim is different. It's as natural as sending yourself a quick note — but instead of forgetting it later, Glim turns it into something you can actually use. No layers, no clutter, just memory that works for you. Make stronger connections."
     },
     {
       question: "How much relationship opportunity am I losing now?",
@@ -32,8 +32,12 @@ const AiFaq = () => {
       answer: "Absolutely. Glim adapts to your workflow rather than forcing you into rigid processes. You can customize how you capture information, organize relationships, and set follow-up preferences to match your unique relationship-building style."
     },
     {
+      question: "How is Glim better than other tools out there?",
+      answer: "Most tools are built for tracking pipelines or managing workflows. They rely on rigid forms, dashboards, and endless manual input — which makes them feel like work.\n\nGlim is different. It's as natural as sending yourself a quick note — but instead of forgetting it later, Glim turns it into something you can actually use. No layers, no clutter, just memory that works for you. Make stronger connections."
+    },
+    {
       question: "How do I measure ROI with Glim?",
-      answer: "Users typically see 7-8x ROI compared to traditional CRMs through higher conversion rates, improved relationship retention, more warm referrals, and time saved on relationship management. Glim turns relationship memory into measurable business outcomes."
+      answer: "Glim helps you follow up faster, remember key details, and show up with context — which builds stronger relationships and better results over time.\n\nThat could mean more warm referrals, higher trust, shorter sales cycles, or simply fewer dropped conversations. The ROI depends on how you use it — whether it's helping you close a $10,000 deal or keeping a $1 million relationship alive, it all starts with memory you can rely on."
     },
   ];
 

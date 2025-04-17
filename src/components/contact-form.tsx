@@ -95,7 +95,8 @@ export default function ContactForm() {
         borderWidth: '3px', 
         borderStyle: 'solid'
       }}>
-      <h3 className="text-2xl font-semibold mb-6 text-[#0a2a1f]">Share Your Memory Challenges</h3>
+      <h3 className="text-2xl font-semibold mb-2 text-[#0a2a1f]">Curious? Let's make memory effortless.</h3>
+      <p className="text-gray-600 mb-6">We're building Glim for people who care about conversations that convert — because they're built on memory, not guesswork.</p>
       
       {formState.isSuccess && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6">
@@ -147,7 +148,7 @@ export default function ContactForm() {
             name="email" 
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter your email" 
+            placeholder="We respect your inbox. Only relevant updates, nothing more" 
             className="w-full px-4 py-2 bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" 
             disabled={formState.isSubmitting}
             required

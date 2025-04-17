@@ -7,7 +7,7 @@ import { Footer } from '@/components/ui/footer'
 import { HeroSection } from '@/components/sections/hero-section'
 import { WhyGlimSection } from '@/components/sections/why-glim-section'
 import { ValueProposition } from '@/components/sections/value-proposition'
-import { StatsTimeline } from '@/components/sections/stats-timeline'
+import { FrictionlessCapture } from '@/components/sections/frictionless-capture'
 import ContactForm from '@/components/contact-form'
 
 // Dynamically import components with SSR disabled to prevent hydration issues
@@ -29,9 +29,9 @@ export default function Home() {
         {/* Value Proposition Section */}
         <ValueProposition />
         
-        {/* Stats Timeline section with enhanced background */}
-        <StatsTimeline />
-        
+        {/* NEW: Frictionless Capture Section */}
+        <FrictionlessCapture />
+                
         {/* How Glim Works Section */}
         <HowGlimWorks />
         
@@ -59,7 +59,7 @@ export default function Home() {
                     Connect With the Memory Engine
                   </h2>
                   <p className="text-white/90 text-lg mb-8 drop-shadow-sm">
-                    Your brain was never meant to be a CRM. Reach out to discover how Glim can transform your relationship memory into momentum.
+                    Missed details are costing you relationships and missed opportunities. Reach out to discover how Glim can transform your relationship memory into momentum.
                   </p>
                   
                   <div className="bg-white/95 p-4 rounded-lg mb-6 flex items-center shadow-md backdrop-blur-sm">
