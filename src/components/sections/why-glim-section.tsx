@@ -288,7 +288,7 @@ export function WhyGlimSection() {
               initial="initial"
               animate={isInView ? "animate" : "initial"}
             >
-              Deeper Trust. Stronger Follow-Ups. Better Relationships
+              Deeper Trust. Stronger Follow-Ups.<br className="hidden md:block" /> Better Relationships.
             </motion.h2>
             
             {/* Split Text Subheadline */}

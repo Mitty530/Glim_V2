@@ -20,10 +20,6 @@ const AiFaq = () => {
       answer: "The biggest follow-up mistakes aren't about forgetting to do it. They're about doing it without context. That's when messages feel cold, generic, or out of sync.\nGlim captures the key things people say and care about right after your conversations. When it's time to reconnect, it gives you a personalized, memory-rich summary so every follow-up feels thoughtful, timely, and relevant."
     },
     {
-      question: "How is Glim different from a standard CRM?",
-      answer: "Most tools are built for tracking pipelines or managing workflows. They rely on rigid forms, dashboards, and endless manual input — which makes them feel like work.\n\nGlim is different. It's as natural as sending yourself a quick note — but instead of forgetting it later, Glim turns it into something you can actually use. No layers, no clutter, just memory that works for you. Make stronger connections."
-    },
-    {
       question: "How much relationship opportunity am I losing now?",
       answer: "Research shows 80% of relationship opportunities are lost due to poor follow-up timing, and 60% of professionals forget crucial relationship context within 14 days. Glim helps recover this lost potential by ensuring you never forget what makes a relationship valuable."
     },
